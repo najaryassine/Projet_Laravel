@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+
+
 
 class UserController extends Controller
 {
@@ -42,6 +46,7 @@ class UserController extends Controller
             'name' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore(Auth::user()->id)],
             'phone' => ['required', 'numeric', 'digits:8'],
+            'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised()],
             'date_of_birth' => ['required', 'date', 'before_or_equal:' . Carbon::now()->subYears(18)->format('Y-m-d')],
             'avatar' => ['image', 'max:2048'], 
         ]);
@@ -58,6 +63,9 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->date_of_birth = $request->date_of_birth;
         $user->avatar = $avatar;
+        $pass = Hash::make($request->password);
+        $user->password = $pass;
+
 
         $user->save();
 

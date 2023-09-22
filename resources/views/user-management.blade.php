@@ -96,7 +96,7 @@
                                         <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit user">
                                             <i class="fas fa-user-edit text-secondary"></i>
                                         </a>
-                                        <form method="POST" action="{{ route('users.destroy', ['user' => $user->id]) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                        <form method="POST" action="{{ route('users.destroy', ['user' => $user->id]) }}" style="display: inline;" onsubmit="confirmation(event)">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="border-0 bg-transparent p-0" data-bs-toggle="tooltip" data-bs-original-title="Delete user">
@@ -118,5 +118,24 @@
         </div>
     </div>
 </div>
+<script>
+    function confirmation(ev) {
+        ev.preventDefault();
+        var form = ev.currentTarget;
+        var urlToSubmit = form.getAttribute('action');
 
+        swal({
+            title: "Are you sure to Delete this User",
+            text: "You will not be able to revert this!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+        });
+    }
+</script>
 @endsection
