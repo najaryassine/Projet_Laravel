@@ -75,12 +75,13 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $user = User::find($user->id);
+        return view('updateUser')->with('user',$user);
     }
 
     public function update(Request $request, User $user)
     {
-        // Validate the request data
+        
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
@@ -88,7 +89,6 @@ class UserController extends Controller
             'date_of_birth' => 'required|date',
         ]);
 
-        // Update the user
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;

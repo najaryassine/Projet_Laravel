@@ -93,8 +93,7 @@
                                         <span class="text-secondary text-xs font-weight-bold">{{ $user->created_at->format('Y F d') }}</span>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit user">
-                                            <i class="fas fa-user-edit text-secondary"></i>
+                                        <a href="{{ url('/users/' . $user->id . '/edit') }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit user">                                            <i class="fas fa-user-edit text-secondary"></i>
                                         </a>
                                         <form method="POST" action="{{ route('users.destroy', ['user' => $user->id]) }}" style="display: inline;" onsubmit="confirmation(event)">
                                             @csrf

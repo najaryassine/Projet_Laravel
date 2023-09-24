@@ -72,7 +72,15 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/users/add', [UserController::class, 'store']);
 
 	Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-	Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+	// Route::get('/users/{id}/edit', function () {
+	// 	return view('updateUser');
+	// });
+	// Route::put('/users/{user}', [UserController::class, 'update']);
+
+	// Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+	Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+
 	Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
     Route::get('/logout', [SessionsController::class, 'destroy']);

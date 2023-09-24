@@ -146,8 +146,13 @@
                                 <textarea class="form-control" id="about" rows="3" placeholder="Say something about yourself" name="about">{{ auth()->user()->about }}</textarea>
                             </div>
                         </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn bg-gradient-primary btn-md mt-4 mb-4">{{ __('Save Changes') }}</button>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <a href="{{ url()->previous() }}" class="btn btn-secondary mt-4 mb-4">{{ __('Back') }}</a>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn bg-gradient-primary btn-md mt-4 mb-4">{{ __('Save Changes') }}</button>
+                            </div>
                     </div>
                 </form>
             </div>
