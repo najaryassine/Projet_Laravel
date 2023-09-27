@@ -13,8 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->text('about')->nullable();
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('phone');
+            $table->string('location')->nullable();
+            $table->string('avatar')->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->integer('role')->default(0);
+            $table->text('about')->nullable(); // Add the about column with nullable constraint
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 
