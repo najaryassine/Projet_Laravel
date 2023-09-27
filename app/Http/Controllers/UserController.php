@@ -79,23 +79,25 @@ class UserController extends Controller
         return view('updateUser')->with('user', $user);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request,  $id)
     {
-        
+
+
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'email' => 'required|email|unique:users,email,' ,
             'phone' => 'required',
             'date_of_birth' => 'required|date',
         ]);
 
+        $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->date_of_birth = $request->date_of_birth;
         $user->save();
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully!');
+        return redirect()->route('user-management')->with('success', 'User updated successfully!');
     }
 
     public function destroy(User $user)
