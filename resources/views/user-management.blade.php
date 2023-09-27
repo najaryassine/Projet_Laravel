@@ -48,6 +48,9 @@
                                         Email
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Role
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Phone
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -83,6 +86,17 @@
                                         <p class="text-xs font-weight-bold mb-0">{{ $user->email }}</p>
                                     </td>
                                     <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">
+                                            @if ($user->role == 0)
+                                                <span style="color: red;">Admin</span>
+                                            @elseif ($user->role == 1)
+                                                <span style="color: blue;">Freelancer</span>
+                                            @elseif ($user->role == 2)
+                                                <span style="color: green;">Client</span>
+                                            @endif
+                                        </p>
+                                    </td>
+                                    <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $user->phone }}</p>
                                     </td>
                                     <td class="text-center">
@@ -93,7 +107,7 @@
                                         <span class="text-secondary text-xs font-weight-bold">{{ $user->created_at->format('Y F d') }}</span>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ url('/users/' . $user->id . '/edit') }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit user">                                            <i class="fas fa-user-edit text-secondary"></i>
+                                        <a href="{{ url('/users/edit' . $user->id ) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit user">                                            <i class="fas fa-user-edit text-secondary"></i>
                                         </a>
                                         <form method="POST" action="{{ route('users.destroy', ['user' => $user->id]) }}" style="display: inline;" onsubmit="confirmation(event)">
                                             @csrf

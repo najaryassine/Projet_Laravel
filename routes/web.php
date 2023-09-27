@@ -71,7 +71,10 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 	Route::post('/users/add', [UserController::class, 'store']);
 
-	Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+	// Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+
+	Route::get('/users/edit{id}', [UserController::class, 'edit'])->name('users.edit');
+
 
 	// Route::get('/users/{id}/edit', function () {
 	// 	return view('updateUser');
