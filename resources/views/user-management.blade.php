@@ -90,9 +90,9 @@
                                             @if ($user->role == 0)
                                                 <span style="color: red;">Admin</span>
                                             @elseif ($user->role == 1)
-                                                <span style="color: blue;">Freelancer</span>
+                                                <span style="color: blue;">Client</span>
                                             @elseif ($user->role == 2)
-                                                <span style="color: green;">Client</span>
+                                                <span style="color: green;">Freelancer</span>
                                             @endif
                                         </p>
                                     </td>

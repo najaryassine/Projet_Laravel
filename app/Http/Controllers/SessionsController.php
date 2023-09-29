@@ -27,15 +27,36 @@ class SessionsController extends Controller
         if (Hash::check($attributes['password'], $user->password)) {
             Auth::login($user);
             session()->regenerate();
-            return redirect('dashboard')->with(['success' => 'You are logged in.']);
+            if($user->role == '0')
+            {
+                return redirect('dashboard')->with(['success' => 'You are logged in.']);
+            }
+            else if($user->role == '1')
+            {
+                return redirect('client')->with(['success' => 'You are logged in.']);
+            }
+            else
+            {
+                return redirect('freelancer')->with(['success' => 'You are logged in.']);
+            }
+
         } else {
             return back()->withErrors(['email' => 'Email or password invalid. ']);
         }
     }
 
     public function destroy()
-    {
+{
+    if (Auth::check()) {
+        $userRole = Auth::user()->role;
+
         Auth::logout();
+
+        if ($userRole == 1 || $userRole == 2) {
+            return redirect('/account/login');
+        }
+
         return redirect('/login')->with(['success' => 'You\'ve been logged out.']);
     }
+}
 }

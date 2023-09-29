@@ -108,7 +108,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="about">{{ 'About Me' }}</label>
+                        <label for="about">{{ 'About' }}</label>
                         <div class="@error('user.about')border border-danger rounded-3 @enderror">
                             <textarea class="form-control" id="about" rows="3" placeholder="Say something about yourself" name="about">{{ auth()->user()->about }}</textarea>
                         </div>

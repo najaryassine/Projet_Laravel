@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::defaultStringLength(151);
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->string('avatar')->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->integer('role')->default(0);
+            $table->TinyInteger('role')->default(0);
             $table->text('about')->nullable(); // Add the about column with nullable constraint
             $table->rememberToken();
             $table->timestamps();

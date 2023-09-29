@@ -17,6 +17,11 @@ class RegisterController extends Controller
         return view('session.register');
     }
 
+    public function create1()
+    {
+        return view('frontoffice.register');
+    }
+
     public function store()
     {
         $attributes = request()->validate([
