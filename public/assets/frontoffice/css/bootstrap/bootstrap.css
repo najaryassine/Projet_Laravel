@@ -554,10 +554,10 @@ pre code {
 
 .container {
   width: 100%;
-  padding-right: 15px;
+  /* padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
-  margin-left: auto;
+  margin-left: auto; */
 }
 
 @media (min-width: 576px) {
@@ -586,10 +586,10 @@ pre code {
 
 .container-fluid {
   width: 100%;
-  padding-right: 15px;
+  /* padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
-  margin-left: auto;
+  margin-left: auto; */
 }
 
 .row {
@@ -6776,20 +6776,20 @@ button.bg-dark:focus {
   padding: 1.5rem !important;
 }
 
-.pt-4,
+/* .pt-4,
 .py-4 {
   padding-top: 1.5rem !important;
-}
+} */
 
 .pr-4,
 .px-4 {
   padding-right: 1.5rem !important;
 }
 
-.pb-4,
+/* .pb-4,
 .py-4 {
   padding-bottom: 1.5rem !important;
-}
+} */
 
 .pl-4,
 .px-4 {

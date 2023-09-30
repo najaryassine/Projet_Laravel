@@ -16,7 +16,7 @@
                             <input type="text" class="form-control" name="search" placeholder="what are you looging for?">
                         </div>
                         <div class="col-lg-3 form-cols">
-                            <div class="default-select" id="default-selects"">
+                            <div class="default-select" id="default-selects">
                                 <select>
                                     <option value="1">Select area</option>
                                     <option value="2">Dhaka</option>
@@ -505,7 +505,7 @@
                     <h4>Top rated job posts</h4>
                     <div class="active-relatedjob-carusel">
                         <div class="single-rated">
-                            <img class="img-fluid" src="img/r1.jpg" alt="">
+                            <img class="img-fluid" src="{{ asset('assets/frontoffice/img/r1.jpg') }}" alt="">
                             <a href="single.html"><h4>Creative Art Designer</h4></a>
                             <h6>Premium Labels Limited</h6>
                             <p>
@@ -517,7 +517,7 @@
                             <a href="#" class="btns text-uppercase">Apply job</a>
                         </div>
                         <div class="single-rated">
-                            <img class="img-fluid" src="img/r1.jpg" alt="">
+                            <img class="img-fluid" src="{{ asset('assets/frontoffice/img/r1.png') }}" alt="">
                             <a href="single.html"><h4>Creative Art Designer</h4></a>
                             <h6>Premium Labels Limited</h6>
                             <p>
@@ -529,7 +529,7 @@
                             <a href="#" class="btns text-uppercase">Apply job</a>
                         </div>
                         <div class="single-rated">
-                            <img class="img-fluid" src="img/r1.jpg" alt="">
+                            <img class="img-fluid" src="{{ asset('assets/frontoffice/img/r1.png') }}" alt="">
                             <a href="single.html"><h4>Creative Art Designer</h4></a>
                             <h6>Premium Labels Limited</h6>
                             <p>
@@ -559,7 +559,7 @@
                 <div class="single-slidebar">
                     <h4>Carrer Advice Blog</h4>
                     <div class="blog-list">
-                        <div class="single-blog " style="background:#000 url(img/blog1.jpg);">
+                        <div class="single-blog " style="background:#000 url({{ asset('assets/frontoffice/img/blog1.jpg') }});">
                             <a href="single.html"><h4>Home Audio Recording <br>
                             For Everyone</h4></a>
                             <div class="meta justify-content-between d-flex">
@@ -574,7 +574,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="single-blog " style="background:#000 url(img/blog2.jpg);">
+                        <div class="single-blog " style="background:#000 url({{ asset('assets/frontoffice/img/blog2.jpg') }});">
                             <a href="single.html"><h4>Home Audio Recording <br>
                             For Everyone</h4></a>
                             <div class="meta justify-content-between d-flex">
@@ -588,22 +588,7 @@
                                     02
                                 </p>
                             </div>
-                        </div>
-                        <div class="single-blog " style="background:#000 url(img/blog1.jpg);">
-                            <a href="single.html"><h4>Home Audio Recording <br>
-                            For Everyone</h4></a>
-                            <div class="meta justify-content-between d-flex">
-                                <p>
-                                    02 Hours ago
-                                </p>
-                                <p>
-                                    <span class="lnr lnr-heart"></span>
-                                    06
-                                     <span class="lnr lnr-bubble"></span>
-                                    02
-                                </p>
-                            </div>
-                        </div>																		
+                        </div>																	
                     </div>
                 </div>							
 
@@ -636,7 +621,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 download-left">
-                <img class="img-fluid" src="img/d1.png" alt="">
+                <img class="img-fluid" src="{{ asset('assets/frontoffice/img/d1.png') }}" alt="">
             </div>
             <div class="col-lg-6 download-right">
                 <h1>Download the <br>

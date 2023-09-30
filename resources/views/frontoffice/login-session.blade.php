@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <section>
+    <section class="callto-action-area section-gap" id="join">
         <div class="container">
-          <div style="padding-top: 150px;">
+          <div >
             <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
               <div class="card card-plain mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">

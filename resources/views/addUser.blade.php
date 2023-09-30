@@ -10,7 +10,7 @@
                     <h6 class="mb-0">{{ __('Add User :') }}</h6>
                 </div>
                 <div class="card-body pt-4 p-3">
-                    <form action="create" method="POST" role="form text-left" enctype="multipart/form-data">
+                    <form action="add" method="POST" role="form text-left" enctype="multipart/form-data">
                         @csrf
                         @if($errors->any())
                             <div class="mt-3 alert alert-primary alert-dismissible fade show" role="alert" id="error-alert">

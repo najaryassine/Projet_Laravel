@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Project\ProjectController;
+
 
 
 /*
@@ -91,6 +93,8 @@ Route::middleware(['auth'])->group(function () {
 		///////////////////////////////////////
         Route::get('/client', [HomeController::class, 'home1']);
 		Route::get('/logout1', [SessionsController::class, 'destroy']);
+		Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+		Route::post('/projects/create', [ProjectController::class, 'store'])->name('projects.store');
 
 
     });
@@ -104,6 +108,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/freelancer',[HomeController::class, 'home1']);
 		Route::get('/logout2', [SessionsController::class, 'destroy']);
+		Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 
 
 	});
