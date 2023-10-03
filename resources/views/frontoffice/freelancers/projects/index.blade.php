@@ -15,7 +15,7 @@
                 @foreach ($projects as $project)
                 <div class="single-post d-flex flex-row">
                     <div class="thumb">
-                        <img src="{{ asset('assets/frontoffice/img/post.png') }}" alt="">
+                        <img src="{{ asset('storage/assets/img/' . $project->image) }}" alt="" height="69" width="109">
                         <ul class="tags">
                             <li>
                                 <a href="#">{{ $project->category }}</a>
@@ -25,8 +25,8 @@
                     <div class="details">
                         <div class="title d-flex flex-row justify-content-between">
                             <div class="titles">
-                                <h4>Title :</h4>
-                                <h6>{{ $project->title }}</h6>					
+                                <h4>Title : {{ $project->title }}</h4>
+                                {{-- <h6></h6>					 --}}
                             </div>
                             <ul class="btns">
                                 <li><a href="#"><span class="lnr lnr-heart"></span></a></li>
@@ -42,7 +42,9 @@
                             @else
                             <h4><span style="color: #FFF000;">Not Completed</span></h4>
                             @endif
-                        </h5>                        <p class="address"><span class="lnr lnr-map"></span> {{ $project->location }}</p>
+                            <h5>Required Skills:</h5>
+
+                        </h5><p class="address"><span class="lnr lnr-map"></span> {{ $project->required_skills }}</p>
                         <p class="address"><span class="lnr lnr-database"></span> {{ $project->cost }} $</p>
                     </div>
                 </div>

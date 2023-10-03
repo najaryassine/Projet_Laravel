@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,19 +17,8 @@ class UserController extends Controller
 {
     public function index()
 {
-    $perPage = 6; // Number of users per page
-    $currentPage = Paginator::resolveCurrentPage();
-
-    $users = User::all();
-
-    // $users = User::table('users')->get();
-    $data = $users->slice(($currentPage - 1) * $perPage, $perPage);
-    $paginatedData = new LengthAwarePaginator(
-        $data, count($users), $perPage, $currentPage,
-        ['path' => Paginator::resolveCurrentPath()]
-    );
-
-    return view('user-management', ['users' => $paginatedData]);
+    $users = User::paginate(6);
+    return view('user-management', ['users' => $users]);
 }
 
     public function create()

@@ -1,4 +1,3 @@
-        <div style="padding-top: 150px;"></div>
 
 <footer class="footer-area section-gap" >
     <div class="container">

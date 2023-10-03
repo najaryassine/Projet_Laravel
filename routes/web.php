@@ -64,8 +64,7 @@ Route::middleware(['auth'])->group(function () {
 	})->name('sign-up');
 
 
-
-	
+//////////User admin routes//////////////////////////////////////////////////////////////////////:///////////////
 	Route::get('/user-management', [UserController::class, 'index'])->name('user-management');
 	Route::get('/users/add', function () {
 		return view('addUser');
@@ -74,10 +73,33 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/users/edit{id}', [UserController::class, 'edit'])->name('users.edit');
 	Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 	Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-
     Route::get('/logout', [SessionsController::class, 'destroy']);
 	Route::get('/user-profile', [InfoUserController::class, 'create']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////Projects admin routes////////////////////////////////////////////////////////////////////////////////////
+	Route::get('/project-management', [ProjectController::class, 'index1'])->name('project-management');
+	Route::get('/projects/add', [ProjectController::class, 'create1']);
+	Route::post('/projects/add', [ProjectController::class, 'store1']);
+	Route::delete('/projects/{project}', [ProjectController::class, 'store1'])->name('projects.destroy1');
+	Route::get('/projects/show{id}', [ProjectController::class, 'show'])->name('projects.show1');
+	Route::get('/projects/edit{id}', [ProjectController::class, 'edit1'])->name('projects.edit1');
+	Route::put('/projects/edit{id}', [ProjectController::class, 'update1'])->name('projects.update1');
+
+////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
+
+
+
+
+
+
+
+
+
+
+
+
     Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
