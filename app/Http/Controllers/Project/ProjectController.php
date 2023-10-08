@@ -134,7 +134,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = Project::find($id);
-        return view('projects.updateProject', compact('project'));
+        return view('frontoffice.clients.projects.updateProject', compact('project'));
 
     }
 
@@ -165,17 +165,28 @@ class ProjectController extends Controller
             'title' => 'required',
             'description' => 'required',
             'image' => 'nullable|image',
-            'client_id' => 'exists:users,id',
             'cost' => 'numeric',
-            'status' => 'in:not completed,completed',
-            'required_skills' => 'string',
             'category' => 'string',
         ]);
 
-        $project = Project::find($id);
-        $project->update($validatedData);
+        if ($request->hasFile('image')) {
+            $uploadedImage = $request->file('image');
+            $imageFileName = $uploadedImage->getClientOriginalName();
+            $imagePath = $uploadedImage->storeAs('public/assets/img', $imageFileName);
+            $image = $imageFileName;
+    
+            Project::where('id', $id)
+                ->update(['image' => $image]);
+        }
 
-        return redirect()->route('projects.show', $project->id)
+        $project = Project::find($id);
+        $project->title = $request->title;
+        $project->description = $request->description;
+        $project->cost = $request->cost;
+        $project->category = $request->category;
+        $project->save();
+
+        return redirect()->route('projects.create')
             ->with('success', 'Project updated successfully.');
     }
 

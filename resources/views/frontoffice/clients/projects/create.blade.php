@@ -2,9 +2,6 @@
 
 @section('content')
 
-{{-- <section class="banner-area " id="home">	
-</section> --}}
-
 <section class="callto-action-area section-gap" id="join">
     <div class="container col-md-6"  style="padding-top: 150px;">
         <div class="row d-flex justify-content-center">
@@ -111,79 +108,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-                        {{-- <div class="col-lg-8 col-md-12">
-                            <label for="title">Title</label>
-                            <input type="text" name="title" id="title" required>
-                        </div> --}}
-{{--                     
-                        <div class="col-lg-8 col-md-12">
-                            <label for="description">Description</label>
-                            <textarea name="description" id="description" required></textarea>
-                        </div>
-                     --}}
-                        {{-- <div class="col-lg-8 col-md-12">
-                            <label for="image">Image</label>
-                            <input type="file" name="image" id="image">
-                        </div> --}}
-                    
-                        {{-- <div class="col-lg-8 col-md-12">
-                            <label for="cost">Cost</label>
-                            <input type="text" name="cost" id="cost">
-                        </div> --}}
-                    
-                        {{-- <div class="col-lg-8 col-md-12">
-                            <label for="required_skills">Required Skills</label>
-                            <select name="required_skills[]" id="required_skills" multiple>
-                                <option value="Administratif">Administratif</option>
-                                <option value="Application Mobile">Application Mobile</option>
-                                <option value="Autres">Autres</option>
-                                <option value="Commercial">Commercial</option>
-                                <option value="Comptabilité">Comptabilité</option>
-                                <option value="Développement spécifique">Développement spécifique</option>
-                                <option value="Formation Coaching">Formation Coaching</option>
-                                <option value="Gestion d’entreprise">Gestion d’entreprise</option>
-                                <option value="Graphisme et Design">Graphisme et Design</option>
-                                <option value="Logiciel">Logiciel</option>
-                                <option value="Logistique">Logistique</option>
-                                <option value="Musique et audio">Musique et audio</option>
-                                <option value="Rédaction web">Rédaction web</option>
-                                <option value="Site E-commerce">Site E-commerce</option>
-                                <option value="Traduction">Traduction</option>
-                                <option value="Vidéo et animation">Vidéo et animation</option>
-                                <option value="Web">Web</option>
-                                <option value="Webmarketing">Webmarketing</option>
-                            </select>
-                        </div> --}}
-                    
-                        {{-- <div class="col-lg-8 col-md-12">
-                            <label for="category">Category</label>
-                            <select name="category" id="category">
-                                <option value="Administratif">Administratif</option>
-                                <option value="Application Mobile">Application Mobile</option>
-                                <option value="Autres">Autres</option>
-                                <option value="Commercial">Commercial</option>
-                                <option value="Comptabilité">Comptabilité</option>
-                                <option value="Développement spécifique">Développement spécifique</option>
-                                <option value="Formation Coaching">Formation Coaching</option>
-                                <option value="Gestion d’entreprise">Gestion d’entreprise</option>
-                                <option value="Graphisme et Design">Graphisme et Design</option>
-                                <option value="Logiciel">Logiciel</option>
-                                <option value="Logistique">Logistique</option>
-                                <option value="Musique et audio">Musique et audio</option>
-                                <option value="Rédaction web">Rédaction web</option>
-                                <option value="Site E-commerce">Site E-commerce</option>
-                                <option value="Traduction">Traduction</option>
-                                <option value="Vidéo et animation">Vidéo et animation</option>
-                                <option value="Web">Web</option>
-                                <option value="Webmarketing">Webmarketing</option>
-                            </select>
-                        </div> --}}
-                    
-                        {{-- <div>
-                            <button class="text-uppercase loadmore-btn mx-auto d-block" type="submit">Create Project</button>
-                        </div> --}}
 
                         <div class="d-flex justify-content-between">
                            

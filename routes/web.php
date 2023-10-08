@@ -117,6 +117,10 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/logout1', [SessionsController::class, 'destroy']);
 		Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
 		Route::post('/projects/create', [ProjectController::class, 'store'])->name('projects.store');
+		Route::get('/projects/list', [ProjectController::class, 'index'])->name('projects.index');
+		Route::get('/projects/e{id}', [ProjectController::class, 'edit'])->name('projects.edit');
+		Route::put('/projects/e{id}', [ProjectController::class, 'update'])->name('projects.update');
+
 
 
     });
