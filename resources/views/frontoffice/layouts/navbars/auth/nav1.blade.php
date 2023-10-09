@@ -7,7 +7,14 @@
           <nav id="nav-menu-container">
             <ul class="nav-menu">
               <li class="menu-active"><a href="{{ url('/client')}}">Home Client</a></li>
-              <li><a href="{{ url('/projects')}}">Project</a></li>
+              <li class="menu-has-children"><a href="{{ url('/projects/list')}}">Project</a>
+                <ul>
+            <li><a href="{{ url('/projects/list')}}">List Projects</a></li>
+            <li><a href="{{ url('/projects/create')}}">Add</a></li>
+            <li><a href="{{ url('/projects/list')}}">My Projects</a></li>
+
+                </ul>
+              </li>
               <li><a href="category.html">Category</a></li>
               <li><a href="price.html">Price</a></li>
               <li><a href="blog-home.html">Blog</a></li>

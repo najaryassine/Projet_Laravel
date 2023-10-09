@@ -17,5 +17,12 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) {
             return route('login');
         }
+        elseif ($user->role == '0') {
+            return '/dashboard';
+        } elseif ($user->role == '1') {
+            return '/client';
+        } else {
+            return '/freelancer';
+        }
     }
 }

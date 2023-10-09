@@ -30,6 +30,7 @@ class RegisterController extends Controller
             'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised()],
             'phone' => ['required', 'numeric', 'digits:8'],
             // 'avatar' => ['required', 'url'],
+            'role' => ['required'],
             'date_of_birth' => ['required', 'date', 'before_or_equal:' . Carbon::now()->subYears(18)->format('Y-m-d')],
             'agreement' => ['accepted']
         ]);
@@ -40,6 +41,17 @@ class RegisterController extends Controller
         session()->flash('success', 'Your account has been created.');
         $user = User::create($attributes);
         Auth::login($user); 
-        return redirect('/dashboard');
+        if($user->role == '0')
+            {
+                return redirect('dashboard')->with(['success' => 'You are logged in.']);
+            }
+            else if($user->role == '1')
+            {
+                return redirect('client')->with(['success' => 'You are logged in.']);
+            }
+            else
+            {
+                return redirect('freelancer')->with(['success' => 'You are logged in.']);
+            }
     }
 }

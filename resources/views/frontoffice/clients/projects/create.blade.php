@@ -2,18 +2,30 @@
 
 @section('content')
 
-<section class="callto-action-area section-gap" id="join">
-    <div class="container col-md-6"  style="padding-top: 150px;">
+<section class="banner-area relative" >	
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                    <h1 class="text-white">
+                        Add Project :				
+                    </h1>	
+                    <p class="text-white link-nav"><a>Home</a>  <span class="lnr lnr-arrow-right"></span>  <a> Add Project</a></p>
+            </div>											
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container col-md-6">
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-60 col-lg-10">
                 <div class="title text-center">
                     <h1 class="mb-10">Add A Project</h1>
-                    <p>Who are in extremely love with eco friendly system.</p>
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body pt-4 p-3 d-flex justify-content-center">
+        <div class="container">
+            <div>
                     <form method="POST" action="{{ route('projects.store') }}" enctype="multipart/form-data">
                         @csrf
 
@@ -109,12 +121,11 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-between">
-                           
-                            <div>
-                                <button type="submit" class="primary-btn">{{ __('Save Changes') }}</button>
-                            </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary mt-20 text-white">Save</button>
                         </div>
+                        <div class="mt-20 alert-msg" style="text-align: left;"></div>
+
                     </form>
                 </div>
             </div>

@@ -113,11 +113,11 @@ Route::middleware(['auth'])->group(function () {
 		///////////////////////////////////////
 		///////---->Client ROUTES<----/////
 		///////////////////////////////////////
-        Route::get('/client', [HomeController::class, 'home1']);
+        Route::get('/client', [HomeController::class, 'home1'])->name('home1');;
 		Route::get('/logout1', [SessionsController::class, 'destroy']);
 		Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
 		Route::post('/projects/create', [ProjectController::class, 'store'])->name('projects.store');
-		Route::get('/projects/list', [ProjectController::class, 'index'])->name('projects.index');
+		Route::get('/projects/list', [ProjectController::class, 'index'])->name('projects.index1');
 		Route::get('/projects/e{id}', [ProjectController::class, 'edit'])->name('projects.edit');
 		Route::put('/projects/e{id}', [ProjectController::class, 'update'])->name('projects.update');
 
@@ -132,7 +132,7 @@ Route::middleware(['auth'])->group(function () {
 		///////////////////////////////////////
 
 
-        Route::get('/freelancer',[HomeController::class, 'home1']);
+        Route::get('/freelancer',[HomeController::class, 'home2'])->name('home2');;
 		Route::get('/logout2', [SessionsController::class, 'destroy']);
 		Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 
@@ -168,3 +168,7 @@ Route::get('/login', function () {
 Route::get('/account/login', function () {
     return view('frontoffice/login-session');
 })->name('login1');
+
+Route::get('/aboutus', function () {
+    return view('frontoffice.aboutus');
+});

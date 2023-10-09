@@ -1,4 +1,4 @@
-@extends('frontoffice.layouts.user_type.guest')
+@extends('frontoffice.layouts.user_type.auth')
 
 @section('content')
 

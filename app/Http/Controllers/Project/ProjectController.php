@@ -15,9 +15,18 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all();
+        $selectedCategory = $request->input('category');
+    
+        $query = Project::query();
+    
+        if ($selectedCategory) {
+            $query->where('category', $selectedCategory);
+        }
+    
+        $projects = $query->paginate(4); // Paginate the projects, displaying 4 per page
+    
         return view('frontoffice.freelancers.projects.index', compact('projects'));
     }
 
