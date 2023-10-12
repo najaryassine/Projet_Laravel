@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Project\ProjectController;
+use App\Http\Controllers\Contract\ContractController;
+
 
 
 
@@ -118,8 +120,12 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
 		Route::post('/projects/create', [ProjectController::class, 'store'])->name('projects.store');
 		Route::get('/projects/list', [ProjectController::class, 'index'])->name('projects.index1');
-		Route::get('/projects/e{id}', [ProjectController::class, 'edit'])->name('projects.edit');
-		Route::put('/projects/e{id}', [ProjectController::class, 'update'])->name('projects.update');
+		Route::get('/projects/e{id}', [ProjectController::class, 'edit'])->name('projects.edit1');
+		Route::put('/projects/e{id}', [ProjectController::class, 'update'])->name('projects.update1');
+		Route::get('/projects/created', [ProjectController::class, 'list'])->name('projects.list1');
+		Route::get('/projects{id}', [ProjectController::class, 'show1'])->name('project.showC');
+
+
 
 
 
@@ -131,10 +137,12 @@ Route::middleware(['auth'])->group(function () {
 		///////---->FreeLancer ROUTES<----/////
 		///////////////////////////////////////
 
-
+		
         Route::get('/freelancer',[HomeController::class, 'home2'])->name('home2');;
 		Route::get('/logout2', [SessionsController::class, 'destroy']);
 		Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+		Route::get('apply/contract/{userId}/{projectId}/{cost}/{clientId}', [ContractController::class, 'apply'])->name('apply.contract');
+		Route::get('/projects/{id}', [ProjectController::class, 'show1'])->name('project.show1');
 
 
 	});

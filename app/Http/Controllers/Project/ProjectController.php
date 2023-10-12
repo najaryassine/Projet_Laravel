@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\User;
+use App\Models\Contract;
+use Illuminate\Support\Facades\Auth;
+
+
 
 
 class ProjectController extends Controller
@@ -25,9 +29,22 @@ class ProjectController extends Controller
             $query->where('category', $selectedCategory);
         }
     
-        $projects = $query->paginate(4); // Paginate the projects, displaying 4 per page
+        $projects = $query->paginate(4); 
+
+        $appliedContracts = Contract::where('freelancer_id', Auth::user()->id);
     
-        return view('frontoffice.freelancers.projects.index', compact('projects'));
+        return view('frontoffice.freelancers.projects.index', compact('projects', 'appliedContracts'));    }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list(Request $request)
+    {
+        $projects = Project::all();
+    
+        return view('frontoffice.clients.projects.created', compact('projects'));
     }
 
     /**
@@ -132,6 +149,24 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         return view('projects.show', compact('project'));
+    }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show1($id)
+    {
+    $project = Project::find($id);
+
+    if (!$project) {
+        abort(404); 
+    }
+    $appliedContracts = Contract::where('freelancer_id', Auth::user()->id);
+
+    return view('frontoffice.freelancers.projects.show', compact('project','appliedContracts'));
     }
 
     /**

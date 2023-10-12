@@ -15,7 +15,7 @@
         </div>
         <div class="card">
             <div class="card-body pt-4 p-3 d-flex justify-content-center">
-            <form action="{{ route('projects.update', ['id' => $project->id]) }}" method="POST" role="form text-left" enctype="multipart/form-data">
+            <form action="{{ route('projects.update1', ['id' => $project->id]) }}" method="POST" role="form text-left" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

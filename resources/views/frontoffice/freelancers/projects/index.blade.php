@@ -20,12 +20,15 @@
     <div class="container">
         <div class="row justify-content-center d-flex">
             <div class="col-lg-8 post-list">
-                {{-- <ul class="cat-list">
-                    <li><a href="#">Recent</a></li>
-                    <li><a href="#">Full Time</a></li>
-                    <li><a href="#">Intern</a></li>
-                    <li><a href="#">part Time</a></li>
-                </ul> --}}
+                @if(session('success'))
+                 <script>
+                     document.addEventListener('DOMContentLoaded', function () {
+                     swal({icon: 'success',title: 'Success',text: '{{ session('success') }}',
+                     showConfirmButton: false,timer: 3500});
+                    });
+                 </script>
+                @endif 
+
                 @foreach ($projects as $project)
                 <div class="single-post d-flex flex-row">
                     <div class="thumb">
@@ -42,12 +45,26 @@
                                 <h4> {{ $project->title }}</h4>
                             </div>
                             <ul class="btns" style="padding-left: 50px;">
-                                {{-- <li><a href="#">Apply</a></li> --}}
-                                <a class="genric-btn success-border circle" href="#">View
+                                @if (auth()->user()->role == 1)
+                                <a class="genric-btn success-border circle" href="{{ route('project.showC', ['id' => $project->id]) }}">View
                                     <span class="lnr lnr-arrow-right"></span>
                                 </a>
-                                <a href="#" class="genric-btn primary-border circle">Apply Contract
-                                    <span class="lnr lnr-arrow-right"></span></a>
+                                @else
+                                <a class="genric-btn success-border circle" href="{{ route('project.show1', ['id' => $project->id]) }}">View
+                                    <span class="lnr lnr-arrow-right"></span>
+                                </a>
+                                @endif
+        
+                                @if (auth()->user()->role == 2)
+
+                                @if (in_array($project->id, $appliedContracts->pluck('project_id')->toArray()))
+                                    <a class="genric-btn primary-border circle disable" disabled>Already Applied</a>
+                                @else
+                                    <a href="{{ route('apply.contract', ['userId' => Auth::user()->id, 'projectId' => $project->id, 'cost' => $project->cost, 'clientId' => $project->client_id]) }}" class="genric-btn primary-border circle">Apply Contract
+                                        <span class="lnr lnr-arrow-right"></span>
+                                    </a>
+                                @endif
+                            @endif
                             </ul>
                         </div>
                         <p>
@@ -62,12 +79,10 @@
 
                         </h5><p class="address"><span class="lnr lnr-map"></span> {{ $project->required_skills }}</p>
                         <p class="address"><span class="lnr lnr-database"></span> {{ $project->cost }} $</p>
+                        <p class="address"><span class="lnr lnr-date"></span>Published on {{ $project->created_at->format('d F Y') }}</p>
                     </div>
                 </div>
                 @endforeach
-                {{-- @if ($projects->hasMorePages())
-                <a class="text-uppercase loadmore-btn mx-auto d-block" href="{{ $projects->nextPageUrl() }}">Load More Projects</a>
-                @endif --}}
 
                 @if ($projects->hasPages())
                 <div class="row">

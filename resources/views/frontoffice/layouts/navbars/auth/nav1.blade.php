@@ -29,7 +29,19 @@
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none">Sign Out</span>
                 </a>
-              </li>				          
+              </li>	
+              <li>
+		
+              @if (auth()->user()->avatar == null)
+                    <img src="{{ asset('../assets/img/noimage.png') }}"  height="35" width="40">
+                @else
+                <img  src="{{ asset('storage/assets/img/' . auth()->user()->avatar) }}" style="border-radius: 50px;" height="50" width="60">                    
+                @endif 
+              </li>	
+              <li>
+                <p>{{ auth()->user()->name }}</p>
+             </li>	
+ 	          
             </ul>
           </nav><!-- #nav-menu-container -->		    		
         </div>

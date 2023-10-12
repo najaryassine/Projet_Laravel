@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Contract;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Contract;
+use App\Models\User;
 
 class ContractController extends Controller
 {
@@ -15,6 +17,24 @@ class ContractController extends Controller
     public function index()
     {
         //
+    }
+
+     /**
+     * apply for contract.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apply($userId, $projectId, $cost, $clientId)
+    {
+    
+             Contract::create([
+            'freelancer_id' => $userId,
+            'project_id' => $projectId,
+            'cost' => $cost,
+            'client_id' => $clientId,
+            'status' => 'pending',]);
+
+        return redirect('projects')->with('success', 'Contract application submitted successfully.');
     }
 
     /**

@@ -13,10 +13,11 @@
             <div class="row gx-4">
                 <div class="col-auto my-auto">
                     <div class="avatar avatar-xl position-relative"> 
-                        @if (auth()->user()->avatar == null)
+                    @if (auth()->user()->avatar == null)
                         <img id="avatar-preview" src="{{ asset('../assets/img/noimage.png') }}" alt="Default Avatar" class="w-100 border-radius-lg shadow-sm">
                     @else
-                    <img id="avatar-preview" src="{{ asset('storage/assets/img/' . auth()->user()->avatar) }}" alt="User Avatar" class="w-100 border-radius-lg shadow-sm">                    @endif     
+                    <img id="avatar-preview" src="{{ asset('storage/assets/img/' . auth()->user()->avatar) }}" alt="User Avatar" class="w-100 border-radius-lg shadow-sm">                    
+                    @endif     
                     <label for="user-avatar" class="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
                         <i class="fa fa-pen top-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Image"></i>
                     </label>
