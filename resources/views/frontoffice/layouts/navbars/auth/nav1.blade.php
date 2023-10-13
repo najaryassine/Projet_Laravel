@@ -24,24 +24,43 @@
                     <li><a href="single.html">single</a></li>
                 </ul>
               </li>
-              <li>
+              {{-- <li>
                  <a href="{{ url('/logout1')}}" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none">Sign Out</span>
                 </a>
-              </li>	
-              <li>
-		
+              </li>	 --}}
+
+              <li class="menu-has-children">@if (auth()->user()->avatar == null)
+                  <img src="{{ asset('../assets/img/noimage.png') }}" class="nav-link text-body font-weight-bold px-0" height="35" width="40">
+                  @else
+                  <img class="nav-link text-body font-weight-bold px-0" src="{{ asset('storage/assets/img/' . auth()->user()->avatar) }}" style="border-radius: 50px;" 
+                  height="40" width="40"  >                    
+                  @endif 
+                <ul>
+                  <li><a href="{{ url('/profile')}}" class="nav-link text-body font-weight-bold px-0">
+                    <i class="fa fa-user me-sm-1"></i><span class="d-sm-inline d-none"> My Profile</span>
+                   </a></li>
+                  <li><a href="{{ url('/logout1')}}" class="nav-link text-body font-weight-bold px-0">
+                      <i class="fa fa-user me-sm-1"></i><span class="d-sm-inline d-none"> Sign Out</span>
+                     </a>
+                  </li>
+                </ul>
+              </li>
+
+
+              {{-- <li>
               @if (auth()->user()->avatar == null)
-                    <img src="{{ asset('../assets/img/noimage.png') }}"  height="35" width="40">
+                    <img src="{{ asset('../assets/img/noimage.png') }}" class="nav-link text-body font-weight-bold px-0" height="35" width="40">
                 @else
-                <img  src="{{ asset('storage/assets/img/' . auth()->user()->avatar) }}" style="border-radius: 50px;" height="50" width="60">                    
+                <img class="nav-link text-body font-weight-bold px-0" src="{{ asset('storage/assets/img/' . auth()->user()->avatar) }}" style="border-radius: 50px;" 
+                height="40" width="40"  >                    
                 @endif 
-              </li>	
-              <li>
-                <p>{{ auth()->user()->name }}</p>
-             </li>	
- 	          
+              </li> --}}
+
+              {{-- <li>
+                <h6  class="nav-link text-body font-weight-bold px-0" style="color: white;">{{ auth()->user()->name }}</h6>             
+              </li>	 --}}
             </ul>
           </nav><!-- #nav-menu-container -->		    		
         </div>

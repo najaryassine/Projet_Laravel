@@ -81,26 +81,28 @@ Route::middleware(['auth'])->group(function () {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////Projects admin routes////////////////////////////////////////////////////////////////////////////////////
+
 	Route::get('/project-management', [ProjectController::class, 'index1'])->name('project-management');
 	Route::get('/projects/add', [ProjectController::class, 'create1']);
 	Route::post('/projects/add', [ProjectController::class, 'store1']);
-	Route::delete('/projects/{project}', [ProjectController::class, 'store1'])->name('projects.destroy1');
+	Route::delete('/projects/{project}', [ProjectController::class, 'destroy1'])->name('projects.destroy1');
 	Route::get('/projects/show{id}', [ProjectController::class, 'show'])->name('projects.show1');
 	Route::get('/projects/edit{id}', [ProjectController::class, 'edit1'])->name('projects.edit1');
 	Route::put('/projects/edit{id}', [ProjectController::class, 'update1'])->name('projects.update1');
 
 ////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
+//////////Contracts admin routes////////////////////////////////////////////////////////////////////////////////////
+Route::get('/contracts-management', [ContractController::class, 'index1'])->name('contracts-management');
+	Route::get('/contracts/add', [ContractController::class, 'create1']);
+	Route::post('/contracts/add', [ContractController::class, 'store1']);
+	Route::delete('/contracts/{project}', [ContractController::class, 'destroy1'])->name('contracts.destroy1');
+	// Route::get('/contracts/show{id}', [ContractController::class, 'show'])->name('contracts.show1');
+	Route::get('/contracts/edit{id}', [ContractController::class, 'edit1'])->name('contracts.edit1');
+	Route::put('/contracts/edit{id}', [ContractController::class, 'update1'])->name('contracts.update1');
 
 
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     Route::get('/login', function () {
 		return view('dashboard');

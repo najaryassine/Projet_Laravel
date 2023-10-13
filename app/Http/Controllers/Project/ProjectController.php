@@ -55,7 +55,7 @@ class ProjectController extends Controller
     public function index1()
     {
         $projects = Project::paginate(5);
-        return view('project-managment', compact('projects'));
+        return view('project-management', compact('projects'));
     }
 
     /**
@@ -182,7 +182,7 @@ class ProjectController extends Controller
 
     }
 
- /**
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -288,7 +288,7 @@ class ProjectController extends Controller
         $project = Project::find($id);
         $project->delete();
 
-        return redirect()->route('project-managment')
+        return redirect()->route('project-management')
             ->with('success', 'Project deleted successfully.');
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contract extends Model
 {
-    protected $fillable = ['project_id', 'freelancer_id', 'client_id', 'project_cost', 'status']; // Change 'user_id' to 'client_id' in the fillable attributes
+    protected $fillable = ['project_id', 'freelancer_id', 'client_id', 'project_cost', 'status']; 
 
     public function project()
     {
@@ -21,6 +21,6 @@ class Contract extends Model
 
     public function client()
     {
-        return $this->belongsTo(User::class, 'client_id'); // Change the relationship to 'client_id'
+        return $this->belongsTo(User::class, 'client_id'); 
     }
 }

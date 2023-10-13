@@ -62,7 +62,7 @@
                                 @if (in_array($project->id, $appliedContracts->pluck('project_id')->toArray()))
                                     <a class="genric-btn primary-border circle disable" disabled>Already Applied</a>
                                 @else
-                                    <a href="{{ route('apply.contract', ['userId' => Auth::user()->id, 'projectId' => $project->id, 'cost' => $project->cost, 'clientId' => $project->client_id]) }}" class="genric-btn primary-border circle">Apply Contract
+                                    <a href="{{ route('apply.contract', ['userId' => Auth::user()->id, 'projectId' => $project->id, 'cost' => intval($project->cost), 'clientId' => $project->client_id]) }}" class="genric-btn primary-border circle">Apply Contract
                                         <span class="lnr lnr-arrow-right"></span>
                                     </a>
                                 @endif

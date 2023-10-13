@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contract;
 use App\Models\User;
+use App\Models\Project;
+
 
 class ContractController extends Controller
 {
@@ -20,20 +22,25 @@ class ContractController extends Controller
     }
 
      /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index1()
+    {
+        $contracts = Contract::paginate(5);
+        return view('contract-management', compact('contracts'));
+    }
+
+     /**
      * apply for contract.
      *
      * @return \Illuminate\Http\Response
      */
     public function apply($userId, $projectId, $cost, $clientId)
-    {
-    
-             Contract::create([
-            'freelancer_id' => $userId,
-            'project_id' => $projectId,
-            'cost' => $cost,
-            'client_id' => $clientId,
-            'status' => 'pending',]);
-
+    {        
+        Contract::create([ 'freelancer_id' => $userId,'project_id' => $projectId,'project_cost' => $cost,
+        'client_id' => $clientId,'status' => 'pending']);
         return redirect('projects')->with('success', 'Contract application submitted successfully.');
     }
 
@@ -42,9 +49,13 @@ class ContractController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create1()
     {
-        //
+        $users = User::all();
+        $projects = Project::all();
+
+
+        return view('contracts.addContract', compact('users','projects'));
     }
 
     /**
@@ -56,6 +67,26 @@ class ContractController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store1(Request $request)
+    {
+        $validatedData = $request->validate([
+            'project_id' => 'required',
+            'client_id' => 'required',
+            'freelancer_id' => 'required',
+            'project_cost' => 'required',
+        ]);
+
+        $contract = Contract::create($validatedData);
+        
+        return redirect('/project-management')->with('success', 'Project created successfully.');
     }
 
     /**
@@ -75,9 +106,13 @@ class ContractController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit1($id)
     {
-        //
+        $projects = Project::all();
+        $contract = Contract::find($id);
+        $users = User::all();
+
+        return view('contracts.updateContract', compact('contract','users','projects'));
     }
 
     /**
@@ -87,9 +122,17 @@ class ContractController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update1(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'project_id' => 'required',
+            'client_id' => 'required',
+            'freelancer_id' => 'required',
+            'project_cost' => 'required',
+        ]);
+        $contract = Contract::find($id);
+        $contract->update($validatedData);
+        return redirect('/contracts-management')->with('success', 'Contract created successfully.');
     }
 
     /**
@@ -98,8 +141,12 @@ class ContractController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy1($id)
     {
-        //
+        $contract = Contract::find($id);
+        $contract->delete();
+
+        return redirect()->route('contracts-management')
+            ->with('success', 'Contract deleted successfully.');
     }
 }

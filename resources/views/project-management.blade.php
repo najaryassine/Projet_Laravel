@@ -25,9 +25,9 @@
                 <div class="card-header pb-0">
                     <div class="d-flex flex-row justify-content-between">
                         <div>
-                            <h5 class="mb-0">All Users</h5>
+                            <h5 class="mb-0">All Projects</h5>
                         </div>
-                        <a href="/users/add" class="btn bg-gradient-primary btn-sm mb-0" type="button">+&nbsp; New User</a>
+                        <a href="/projects/add" class="btn bg-gradient-primary btn-sm mb-0" type="button">+&nbsp; New Project</a>
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -38,17 +38,23 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         #
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
-                                        User
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Image
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Role
+                                        Title
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Phone
+                                        Client
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Date of Birth
+                                        Cost
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Status
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Category
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Created At
@@ -56,67 +62,65 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action
                                     </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($users as $user)
+                                @foreach($projects as $project)
                                 <tr>
                                     <td class="ps-4">
                                         <p class="text-xs font-weight-bold mb-0">{{$loop->iteration}}</p>
                                     </td>
                                     <td>
-                                        {{-- <div>
-                                            @if ($user->avatar == null)
+                                        <div>
+                                            @if ($project->image == null)
                                             <img src="{{ asset('storage/assets/img/noimage.png') }}" class="avatar avatar-sm me-3">
                                             @else
-                                            <img src="{{ asset('storage/assets/img/' . $user->avatar) }}" class="avatar avatar-sm me-3">
+                                            <img src="{{ asset('storage/assets/img/' . $project->image) }}" class="avatar avatar-sm me-3">
                                             @endif
-                                        </div> --}}
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                              @if ($user->avatar == null)
-                                              <img src="{{ asset('storage/assets/img/noimage.png') }}" class="avatar avatar-sm me-3">
-                                              @else
-                                              <img src="{{ asset('storage/assets/img/' . $user->avatar) }}" class="avatar avatar-sm me-3">
-                                              @endif
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                              <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
-                                              <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
-                                            </div>
-                                          </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $project->title }}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $project->client->name }}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $project->cost }}</p>
                                     </td>
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">
-                                            @if ($user->role == 0)
-                                                <span style="color: red;">Admin</span>
-                                            @elseif ($user->role == 1)
-                                                <span style="color: blue;">Client</span>
-                                            @elseif ($user->role == 2)
-                                                <span style="color: green;">Freelancer</span>
+                                            @if ($project->status == 'not completed')
+                                                <span class="badge badge-sm bg-gradient-warning">Not Completed</span>
+                                            @else
+                                                <span class="badge badge-sm bg-gradient-success">Completed</span>
                                             @endif
                                         </p>
                                     </td>
                                     <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $user->phone }}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $project->category }}</p>
                                     </td>
                                     <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{ \Carbon\Carbon::parse($user->date_of_birth)->format('Y F d') }}
-                                        </p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ \Carbon\Carbon::parse($project->created_at)->format('Y F d') }}</p>
                                     </td>
                                     <td class="text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">{{ $user->created_at->format('Y F d') }}</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="{{ url('/users/edit' . $user->id ) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit user">                                            <i class="fas fa-user-edit text-secondary"></i>
-                                        </a>
-                                        <form method="POST" action="{{ route('users.destroy', ['user' => $user->id]) }}" style="display: inline;" onsubmit="confirmation(event)">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="border-0 bg-transparent p-0" data-bs-toggle="tooltip" data-bs-original-title="Delete user">
-                                                <i class="cursor-pointer fas fa-trash text-secondary"></i>
-                                            </button>
-                                        </form>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ route('projects.show1', $project->id) }}" class="btn btn-link btn-sm">
+                                                <i class="fa fa-eye me-2"></i>Show
+                                            </a>
+                                            <a href="{{ route('projects.edit1', $project->id) }}" class="btn btn-link btn-sm">
+                                                <i class="fas fa-edit me-2"></i>Edit
+                                            </a>
+                                            <form action="{{ route('projects.destroy1', $project->id) }}" method="POST" onsubmit="confirmation(event)">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-link btn-sm" >
+                                                    <i class="fas fa-trash-alt me-2"></i>Delete
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -125,7 +129,7 @@
                     </div>
                 </div>
                 <div class="pagination justify-content-center">
-                    {{ $users->links() }}
+                    {{ $projects->links() }}
                 </div>
             </div>
         </div>
@@ -138,7 +142,7 @@
         var urlToSubmit = form.getAttribute('action');
 
         swal({
-            title: "Are you sure to Delete this User",
+            title: "Are you sure to Delete this Project",
             text: "You will not be able to revert this!",
             icon: "warning",
             buttons: true,
