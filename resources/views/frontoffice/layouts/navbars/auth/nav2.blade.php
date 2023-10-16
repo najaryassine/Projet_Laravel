@@ -25,7 +25,7 @@
                 height="40" width="40"  >                    
                 @endif 
               <ul>
-                <li><a href="{{ url('/profile')}}" class="nav-link text-body font-weight-bold px-0">
+                <li><a href="{{ url('/profile2')}}" class="nav-link text-body font-weight-bold px-0">
                   <i class="fa fa-user me-sm-1"></i><span class="d-sm-inline d-none"> My Profile</span>
                  </a></li>
                 <li><a href="{{ url('/logout2')}}" class="nav-link text-body font-weight-bold px-0">

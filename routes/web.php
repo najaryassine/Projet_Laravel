@@ -104,6 +104,7 @@ Route::get('/contracts-management', [ContractController::class, 'index1'])->name
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
     Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
@@ -119,6 +120,9 @@ Route::get('/contracts-management', [ContractController::class, 'index1'])->name
 		///////////////////////////////////////
         Route::get('/client', [HomeController::class, 'home1'])->name('home1');;
 		Route::get('/logout1', [SessionsController::class, 'destroy']);
+		Route::get('/profile', [InfoUserController::class, 'create1']);
+		Route::post('/profile', [InfoUserController::class, 'store1']);
+		Route::post('/profile/password', [InfoUserController::class, 'updatePassword']);
 		Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
 		Route::post('/projects/create', [ProjectController::class, 'store'])->name('projects.store');
 		Route::get('/projects/list', [ProjectController::class, 'index'])->name('projects.index1');
@@ -138,7 +142,9 @@ Route::get('/contracts-management', [ContractController::class, 'index1'])->name
         ///////////////////////////////////////
 		///////---->FreeLancer ROUTES<----/////
 		///////////////////////////////////////
-
+		Route::get('/profile2', [InfoUserController::class, 'create1']);
+		Route::post('/profile2', [InfoUserController::class, 'store1']);
+		Route::post('/profile2/password', [InfoUserController::class, 'updatePassword']);
 		
         Route::get('/freelancer',[HomeController::class, 'home2'])->name('home2');;
 		Route::get('/logout2', [SessionsController::class, 'destroy']);
