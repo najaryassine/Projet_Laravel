@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Contract;
 use App\Models\User;
 use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class ContractController extends Controller
@@ -18,7 +20,15 @@ class ContractController extends Controller
      */
     public function index()
     {
-        //
+    $userRole = Auth::user()->role;
+
+        if ($userRole == 1) {
+            $contracts = Contract::where('client_id', Auth::user()->id)->paginate(3);
+            return view('frontoffice.clients.contracts.index', compact('contracts'));
+        } else {
+            $contracts = Contract::where('freelancer_id', Auth::user()->id)->paginate(3);
+            return view('frontoffice.clients.contracts.index', compact('contracts'));
+    }
     }
 
      /**
@@ -148,5 +158,20 @@ class ContractController extends Controller
 
         return redirect()->route('contracts-management')
             ->with('success', 'Contract deleted successfully.');
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $contract = Contract::find($id);
+        $contract->delete();
+
+        // return redirect()->view('frontoffice.clients.contracts.index')
+        //     ->with('success', 'Contract deleted successfully.');
+        return redirect()->route('contracts.index0')->with('success', 'Contract deleted successfully.');
     }
 }

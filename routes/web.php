@@ -37,35 +37,6 @@ Route::middleware(['auth'])->group(function () {
 		return view('dashboard');
 	})->name('dashboard');
 
-	Route::get('billing', function () {
-		return view('billing');
-	})->name('billing');
-
-	Route::get('profile', function () {
-		return view('profile');
-	})->name('profile');
-
-	Route::get('rtl', function () {
-		return view('rtl');
-	})->name('rtl');
-
-	Route::get('tables', function () {
-		return view('tables');
-	})->name('tables');
-
-    Route::get('virtual-reality', function () {
-		return view('virtual-reality');
-	})->name('virtual-reality');
-
-    Route::get('static-sign-in', function () {
-		return view('static-sign-in');
-	})->name('sign-in');
-
-    Route::get('static-sign-up', function () {
-		return view('static-sign-up');
-	})->name('sign-up');
-
-
 //////////User admin routes//////////////////////////////////////////////////////////////////////:///////////////
 	Route::get('/user-management', [UserController::class, 'index'])->name('user-management');
 	Route::get('/users/add', function () {
@@ -129,7 +100,12 @@ Route::get('/contracts-management', [ContractController::class, 'index1'])->name
 		Route::get('/projects/e{id}', [ProjectController::class, 'edit'])->name('projects.edit1');
 		Route::put('/projects/e{id}', [ProjectController::class, 'update'])->name('projects.update1');
 		Route::get('/projects/created', [ProjectController::class, 'list'])->name('projects.list1');
-		Route::get('/projects{id}', [ProjectController::class, 'show1'])->name('project.showC');
+		Route::get('/projects{id}', [ProjectController::class, 'show1'])->name('projects.showC');
+		Route::delete('/projects{id}', [ProjectController::class, 'destroy0'])->name('projects.destroy0');
+
+
+		Route::get('/contracts/lists', [ContractController::class, 'index'])->name('contracts.indexC');
+
 
 
 
@@ -151,6 +127,10 @@ Route::get('/contracts-management', [ContractController::class, 'index1'])->name
 		Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 		Route::get('apply/contract/{userId}/{projectId}/{cost}/{clientId}', [ContractController::class, 'apply'])->name('apply.contract');
 		Route::get('/projects/{id}', [ProjectController::class, 'show1'])->name('project.show1');
+		Route::get('/contracts/list', [ContractController::class, 'index'])->name('contracts.index0');
+		Route::delete('/contracts/list/delete{id}', [ContractController::class, 'destroy'])->name('contracts.destroy0');
+
+
 
 
 	});

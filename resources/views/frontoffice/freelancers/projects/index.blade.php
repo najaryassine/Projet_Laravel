@@ -46,7 +46,7 @@
                             </div>
                             <ul class="btns" style="padding-left: 50px;">
                                 @if (auth()->user()->role == 1)
-                                <a class="genric-btn success-border circle" href="{{ route('project.showC', ['id' => $project->id]) }}">View
+                                <a class="genric-btn success-border circle" href="{{ route('projects.showC', ['id' => $project->id]) }}">View
                                     <span class="lnr lnr-arrow-right"></span>
                                 </a>
                                 @else
@@ -155,6 +155,25 @@
     </div>	
 </div>	
 </section>
+<script>
+    function confirmation(ev) {
+        ev.preventDefault();
+        var form = ev.currentTarget;
+        var urlToSubmit = form.getAttribute('action');
 
+        swal({
+            title: "Are you sure to Delete this projects",
+            text: "You will not be able to revert this!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+        });
+    }
+</script>
 
 @endsection

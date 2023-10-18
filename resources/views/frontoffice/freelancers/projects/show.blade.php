@@ -46,6 +46,8 @@
                         @endif
 
                     </h5>
+                    <div class="mt-10 alert-msg" style="text-align: left;"></div>
+
                     <div class="bottom-meta">
                         <div class="user-details row align-items-center">
                             <div class="comment-wrap col-lg-6 col-sm-6">
@@ -53,7 +55,15 @@
                                 @if (auth()->user()->role == 1)
                                     @if (auth()->user()->id == $project->client_id)
                                     <a class="genric-btn primary-border circle "  href="{{ route('projects.edit1', [ 'id' => $project->id])}}">Modify</a>
-
+                                    <form 
+                                    action="{{ route('projects.destroy0', $project->id) }}"
+                                    method="POST" onsubmit="confirmation(event)" style="display: inline;">
+                                     @csrf
+                                     @method('DELETE')
+                                        <button class="genric-btn danger-border circle" type="submit">
+                                         <span class="lnr lnr-arrow-right">Delete</span>
+                                        </button>
+                                    </form>
                                     @endif
 
     
@@ -108,5 +118,25 @@
 
     </div>    
 </section>
+<script>
+    function confirmation(ev) {
+        ev.preventDefault();
+        var form = ev.currentTarget;
+        var urlToSubmit = form.getAttribute('action');
+
+        swal({
+            title: "Are you sure to Delete this projects",
+            text: "You will not be able to revert this!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+        });
+    }
+</script>
 
 @endsection

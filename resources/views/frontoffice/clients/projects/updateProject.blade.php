@@ -3,13 +3,28 @@
 @section('content')
 
 
-<section class="callto-action-area section-gap" id="join">
+
+
+<section class="banner-area relative" >	
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                    <h1 class="text-white">
+                        Update Projects :
+                    </h1>	
+                    <p class="text-white link-nav"><a>Home</a>  <span class="lnr lnr-arrow-right"></span>  <a> Update Project</a></p>
+            </div>											
+        </div>
+    </div>
+</section>
+
+<section>
     <div class="container col-md-6"  style="padding-top: 150px;">
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-60 col-lg-10">
                 <div class="title text-center">
-                    <h1 class="mb-10">Update  Project</h1>
-                    {{-- <p>Who are in extremely love with eco friendly system.</p> --}}
+                    <h1 class="mb-10">Update Your Project :</h1>
                 </div>
             </div>
         </div>
@@ -111,10 +126,13 @@
                         <button type="submit" class="btn btn-primary bg-gradient-primary btn-md mt-4 mb-4">{{ __('Save Changes') }}</button>
                     </div>
                 </div>
+                
             </form>
         </div>
     </div>
 </div>	
+<div class="mt-60 alert-msg" style="text-align: left;"></div>
+
 </section>
 
 

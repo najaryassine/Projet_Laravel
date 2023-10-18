@@ -8,9 +8,8 @@
             <ul class="nav-menu">
               <li class="menu-active"><a href="{{ url('/freelancer')}}">Home Freelancer</a></li>
               <li><a href="{{ url('/projects')}}">Projects</a></li>
-              <li><a href="about-us.html">Postuler</a></li>
-              <li><a href="category.html">Jobs</a></li>
-              <li><a href="price.html">Price</a></li>
+              <li><a href="{{ url('/contracts/list')}}">Contracts</a></li>
+
               <li>
                 <ul>
                     <li><a href="elements.html">elements</a></li>

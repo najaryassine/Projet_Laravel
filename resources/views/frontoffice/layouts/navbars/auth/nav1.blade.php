@@ -11,13 +11,12 @@
                 <ul>
             <li><a href="{{ url('/projects/list')}}">List Projects</a></li>
             <li><a href="{{ url('/projects/create')}}">Add</a></li>
-            <li><a href="{{ url('/projects/list')}}">My Projects</a></li>
+            <li><a href="{{ url('/projects/created')}}">My Projects</a></li>
 
                 </ul>
               </li>
-              <li><a href="category.html">Category</a></li>
-              <li><a href="price.html">Price</a></li>
-              <li><a href="blog-home.html">Blog</a></li>
+              <li class="menu-active"><a href="{{ url('/contracts/list')}}">Contracts</a></li>
+
                 <ul>
                     <li><a href="elements.html">elements</a></li>
                     <li><a href="search.html">search</a></li>

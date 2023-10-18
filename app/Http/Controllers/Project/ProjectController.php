@@ -33,7 +33,8 @@ class ProjectController extends Controller
 
         $appliedContracts = Contract::where('freelancer_id', Auth::user()->id);
     
-        return view('frontoffice.freelancers.projects.index', compact('projects', 'appliedContracts'));    }
+        return view('frontoffice.freelancers.projects.index', compact('projects', 'appliedContracts'));    
+    }
 
      /**
      * Display a listing of the resource.
@@ -42,7 +43,15 @@ class ProjectController extends Controller
      */
     public function list(Request $request)
     {
-        $projects = Project::all();
+        $selectedCategory = $request->input('category');
+
+        $query = Project::where('client_id', Auth::user()->id);
+
+        if ($selectedCategory) {
+            $query->where('category', $selectedCategory);
+        }
+    
+        $projects = $query->paginate(4); 
     
         return view('frontoffice.clients.projects.created', compact('projects'));
     }
@@ -230,7 +239,7 @@ class ProjectController extends Controller
         $project->category = $request->category;
         $project->save();
 
-        return redirect()->route('projects.create')
+        return redirect()->route('projects.list1')
             ->with('success', 'Project updated successfully.');
     }
 
@@ -267,12 +276,12 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy0($id)
     {
         $project = Project::find($id);
         $project->delete();
 
-        return redirect()->route('projects.index')
+        return redirect()->route('projects.list1')
             ->with('success', 'Project deleted successfully.');
     }
 
@@ -291,4 +300,5 @@ class ProjectController extends Controller
         return redirect()->route('project-management')
             ->with('success', 'Project deleted successfully.');
     }
+
 }
