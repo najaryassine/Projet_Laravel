@@ -30,7 +30,8 @@
                 </a>
               </li>	 --}}
 
-              <li class="menu-has-children">@if (auth()->user()->avatar == null)
+              <li class="menu-has-children">
+                @if (auth()->user()->avatar == null)
                   <img src="{{ asset('../assets/img/noimage.png') }}" class="nav-link text-body font-weight-bold px-0" height="35" width="40">
                   @else
                   <img class="nav-link text-body font-weight-bold px-0" src="{{ asset('storage/assets/img/' . auth()->user()->avatar) }}" style="border-radius: 50px;" 

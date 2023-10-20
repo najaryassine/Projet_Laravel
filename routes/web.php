@@ -15,6 +15,8 @@ use App\Http\Controllers\Contract\ContractController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\AdminComplaintController;
+use App\Http\Controllers\Review\ReviewController;
+use App\Http\Controllers\Chat\PusherController;
 
 
 
@@ -115,11 +117,21 @@ Route::delete('/complaints{complaint}', [AdminComplaintController::class, 'destr
 		Route::get('/projects/created', [ProjectController::class, 'list'])->name('projects.list1');
 		Route::get('/projects{id}', [ProjectController::class, 'show1'])->name('projects.showC');
 		Route::delete('/projects{id}', [ProjectController::class, 'destroy0'])->name('projects.destroy0');
-
-
 		Route::get('/contracts/lists', [ContractController::class, 'index'])->name('contracts.indexC');
-
-
+		///////////////////////////////////////
+		////////////Dorra Routes///////////////
+		///////////////////////////////////////
+		Route::match(['get', 'post','delete'],'/rate_review', [ReviewController::class, 'showForm'])->name('showForm');
+		Route::match(['get', 'post','delete'],'/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+		Route::match(['get', 'post','delete'],'/review/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+		Route::put('/reviews/edit/{id}', [ReviewController::class, 'update'])->name('reviews.update');
+		Route::get('/show/{id}', [ReviewController::class, 'show'])->name('reviews.show');
+		// Route::get('/rate_review/{projectId}', [ReviewController::class, 'showForm'])->name('showForm');
+		Route::get('/chat/{id}', [PusherController::class, 'index1'])->name('index1');
+		Route::match(['get', 'post'], '/broadcast', [PusherController::class, 'broadcast'])->name('broadcast');
+		Route::post('/receive', [PusherController::class, 'receive'])->name('receive');
+		///////////////////////////////////////
+		///////////////////////////////////////
 
 
 

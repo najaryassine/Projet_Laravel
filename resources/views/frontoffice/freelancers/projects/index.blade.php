@@ -80,6 +80,11 @@
                         </h5><p class="address"><span class="lnr lnr-map"></span> {{ $project->required_skills }}</p>
                         <p class="address"><span class="lnr lnr-database"></span> {{ $project->cost }} $</p>
                         <p class="address"><span class="lnr lnr-date"></span>Published on {{ $project->created_at->format('d F Y') }}</p>
+                        @if (auth()->user()->role == 1)
+                        <a class="genric-btn success-border circle" href="/rate_review" >
+                            <span class="lnr lnr-arrow-right">Rate & Review</span>
+                        </a>
+                        @endif                    
                     </div>
                 </div>
                 @endforeach
