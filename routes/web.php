@@ -17,7 +17,8 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\AdminComplaintController;
 use App\Http\Controllers\Review\ReviewController;
 use App\Http\Controllers\Chat\PusherController;
-
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 
 
 /*
@@ -87,6 +88,25 @@ Route::put('/complaints{complaint}', [AdminComplaintController::class, 'update']
 Route::delete('/complaints{complaint}', [AdminComplaintController::class, 'destroy'])->name('backoffice.complaints.destroy');
 
 ////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
+////////////article admin routes///////////////////////////////////////////////////////////://///////////////////
+Route::get('/article-management', [ArticleController::class, 'index1'])->name('article-management');
+	Route::delete('/articles{article}', [ArticleController::class, 'destroy1'])->name('articles.destroy');
+	Route::get('/articles/add', function () {
+		return view('addArticle');
+	});
+	Route::post('/articles/add', [ArticleController::class, 'store1'])->name('articles.store');
+	Route::get('/articles/edit{id}', [ArticleController::class, 'edit1'])->name('articles.edit');
+	Route::put('/articles/{id}', [ArticleController::class, 'update1'])->name('articles.update');
+
+////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
+////////////Comment admin routes///////////////////////////////////////////////////////////://///////////////////
+Route::get('/comment-management', [CommentController::class, 'index1'])->name('comment-management');
+	Route::get('/comments/edit{id}', [CommentController::class, 'edit1'])->name('comments.edit');
+	Route::put('/comments/{id}', [CommentController::class, 'update1'])->name('comments.update');
+	Route::delete('/comments/{comment}', [CommentController::class, 'destroy1'])->name('comments.destroy');
+	Route::get('/comments/add', [CommentController::class, 'create1'])->name('comments.add');
+	Route::post('/comments/add', [CommentController::class, 'store1'])->name('comments.store');
+////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
 
 
@@ -152,7 +172,7 @@ Route::delete('/complaints{complaint}', [AdminComplaintController::class, 'destr
 		Route::get('/logout2', [SessionsController::class, 'destroy']);
 		Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 		Route::get('apply/contract/{userId}/{projectId}/{cost}/{clientId}', [ContractController::class, 'apply'])->name('apply.contract');
-		Route::get('/projects/{id}', [ProjectController::class, 'show1'])->name('projects.show1');
+		Route::get('/project{id}', [ProjectController::class, 'show1'])->name('projects.show1');
 		Route::get('/contracts/list', [ContractController::class, 'index'])->name('contracts.index0');
 		Route::delete('/contracts/list/delete{id}', [ContractController::class, 'destroy'])->name('contracts.destroy0');
 		///////////////////////////////////////
@@ -178,12 +198,28 @@ Route::delete('/complaints{complaint}', [AdminComplaintController::class, 'destr
 		 Route::get('/complaints/{complaint}/pdf', [ComplaintController::class, 'generatePDF'])->name('frontoffice.freelancers.complaints.pdf');
  
  		///////////////////////////////////////
+		///////// ////Article routes///////
 		///////////////////////////////////////
 
- 
+		Route::get('/articles', [ArticleController::class, 'index'])->name('frontoffice.article.index');
+        Route::get('/article/create', [ArticleController::class, 'create'])->name('frontoffice.article.create');
+	    Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('frontoffice.article.delete');
+        Route::post('/article', [ArticleController::class, 'store'])->name('frontoffice.article.store');
+
+        Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('frontoffice.article.show');
+   		Route::put('/article/comment/edit{id}', [CommentController::class, 'update'])->name('frontoffice.comment.update');
+        Route::get('/articles/{article}/comments', [CommentController::class, 'index'])->name('frontoffice.article.comments');
+		Route::post('/articles/comments{id}', [CommentController::class, 'store'])->name('frontoffice.article.comments.store');
+		
+		Route::get('/article/comment{id}', [CommentController::class, 'edit'])->name('frontoffice.article.comments.edit');
+		Route::delete('/article/comments{id}', [CommentController::class, 'destroy'])->name('frontoffice.article.comments.destroy');
+		Route::post('/articles/comment', [ArticleController::class, 'storeComment'])->name('frontoffice.article.storeComment');
+		Route::get('/article/edit{id}', [ArticleController::class, 'edit'])->name('frontoffice.articles.edit');
+		Route::put('/article/edit{id}', [ArticleController::class, 'update'])->name('frontoffice.article.update');
 
 
-
+		///////////////////////////////////////
+		///////////////////////////////////////
 
 	});
 });

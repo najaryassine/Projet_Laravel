@@ -50,7 +50,7 @@
                                     <span class="lnr lnr-arrow-right"></span>
                                 </a>
                                 @else
-                                <a class="genric-btn success-border circle" href="{{ route('project.show1', ['id' => $project->id]) }}">View
+                                <a class="genric-btn success-border circle" href="{{ route('projects.show1', ['id' => $project->id]) }}">View
                                     <span class="lnr lnr-arrow-right"></span>
                                 </a>
                                 @endif

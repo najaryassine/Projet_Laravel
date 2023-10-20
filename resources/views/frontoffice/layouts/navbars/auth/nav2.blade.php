@@ -11,6 +11,8 @@
               <li><a href="{{ url('/contracts/list')}}">Contracts</a></li>
               <li><a href="{{ route('frontoffice.freelancers.portfolios.index') }}">Portfolio</a></li>
               <li><a href="{{ route('frontoffice.freelancers.complaints.index') }}">Complaints</a></li>
+              <li><a href="{{ url('/articles')}}">Articles</a></li>
+
               
               <li class="menu-has-children">@if (auth()->user()->avatar == null)
                 <img src="{{ asset('../assets/img/noimage.png') }}" class="nav-link text-body font-weight-bold px-0" height="35" width="40">

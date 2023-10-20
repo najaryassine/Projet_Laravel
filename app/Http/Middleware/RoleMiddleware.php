@@ -22,6 +22,7 @@ class RoleMiddleware
         {
             return $next($request);
         }
-        return response()->json(["You don't have permission to access this page"]);
+        return response('<h1>You don\'t have permission to access this page</h1>', 404)
+    ->header('Content-Type', 'text/html');
     }
 }
