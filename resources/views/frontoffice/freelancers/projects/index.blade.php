@@ -1,7 +1,6 @@
 @extends('frontoffice.layouts.user_type.auth')
 
 @section('content')
-
 <section class="banner-area relative" >	
     <div class="overlay overlay-bg"></div>
     <div class="container">
@@ -80,8 +79,14 @@
                         </h5><p class="address"><span class="lnr lnr-map"></span> {{ $project->required_skills }}</p>
                         <p class="address"><span class="lnr lnr-database"></span> {{ $project->cost }} $</p>
                         <p class="address"><span class="lnr lnr-date"></span>Published on {{ $project->created_at->format('d F Y') }}</p>
-                    </div>
+                        <a href="/rate_review" style = "  position: absolute; right: 25px;">Rate & Review</a>
+                        
+                    
+        
+   
                 </div>
+                    </div>
+                    
                 @endforeach
 
                 @if ($projects->hasPages())
@@ -155,6 +160,5 @@
     </div>	
 </div>	
 </section>
-
 
 @endsection

@@ -14,7 +14,8 @@
                     <img src="{{ asset('storage/assets/img/' . $project->image) }}"  height="250" width="250">
                     @endif
                     <h5>Title: {{ $project->title }}</h5>
-                    <p>Description: {{ $project->description }}</p>
+                    <p>Description: {{ $project->description }}</
+                    p>
                     <p>Client Name: {{ $project->client->name }}</p>
                     <p>Cost: {{ $project->cost }}</p>
                     <p>Category: {{ $project->category }}</p>

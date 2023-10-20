@@ -102,8 +102,12 @@
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                         <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                         <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                    </ul>								
-                </div>
+                    </ul>	
+                    <div >
+                            <a href="{{ route('index1', ['id' => $project->client->id]) }}" class="btn btn-primary btn-sm" style=" margin-left: 10px;">Chat</a>
+                    </div>
+                </div>			
+            </div>
         </div>
 
     </div>    
