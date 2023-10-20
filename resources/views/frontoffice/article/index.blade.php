@@ -35,7 +35,8 @@
                                 <h5 class="card-title">{{ $article->title }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">{{ $article->category }}</h6>
                                 <p class="card-text">{{ $article->content }}</p>
-    
+                                <p>Likes: {{ $article->likes->count() }}</p>
+
                                 <!-- Display comments if available -->
                                 <h3>Comments</h3>
                                 @if ($article->comments->isNotEmpty())
@@ -60,7 +61,20 @@
                                     <p>No comments available for this article.</p>
                                 @endif
     
-                                <!-- Comment form for each article -->
+ <!-- Like/Unlike buttons -->
+ @if (!$article->isLikedByUser(auth()->user()))
+
+ <form method="POST" action="{{ route('articles.like', ['article' => $article]) }}">
+     @csrf
+     <button type="submit" style="background: none; border: none;"><i class="far fa-heart text-danger"></i></button>
+ </form>
+@else
+ <form method="POST" action="{{ route('articles.unlike', ['article' => $article]) }}">
+     @csrf
+     @method('DELETE')
+     <button type="submit" style="background: none; border: none;"><i class="fas fa-heart text-danger"></i></button>
+ </form>
+@endif
                                 <h3>Add a Comment</h3>
                                 <form method="post" action="{{ route('frontoffice.article.comments.store', ['id' => $article->id]) }}">
                                     @csrf
@@ -74,11 +88,11 @@
     
                                 <a href="{{ route('frontoffice.article.show', $article) }}" class="card-link">View Article</a>
                                 <a href="{{ route('frontoffice.articles.edit', ['id' => $article->id]) }}">Edit Article</a>
-                                <form method="POST" action="{{ route('frontoffice.article.delete', $article) }}">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger">Delete Article</button>
-        </form>
+                                <form method="POST" action="{{ route('frontoffice.article.delete', ['article' => $article]) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete Article</button>
+                                </form>
     
                             </div>
                         </div>

@@ -21,6 +21,8 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\LikeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -232,7 +234,10 @@ Route::get('/payments', [PaymentController::class, 'index'])->name('payment.inde
 		Route::get('/article/edit{id}', [ArticleController::class, 'edit'])->name('frontoffice.articles.edit');
 		Route::put('/article/edit{id}', [ArticleController::class, 'update'])->name('frontoffice.article.update');
 
-
+		// Like an article
+		Route::post('/articles/{article}/like', [LikeController::class, 'like'])->name('articles.like');
+		// Unlike an article
+		Route::delete('/articles/{article}/unlike',[LikeController::class, 'unlike'])->name('articles.unlike');
 		///////////////////////////////////////
 		////////////Task Route////////////
 		///////////////////////////////////////

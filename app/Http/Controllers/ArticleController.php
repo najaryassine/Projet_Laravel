@@ -6,20 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Article ; 
 use App\Models\Comment;
+use App\Models\Like;
 
 
 class ArticleController extends Controller
 {
-     /**
-     * Display a listing of the articles.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::with('likes')->get();
+        // $articles = Article::all();
         return view('frontoffice.article.index', compact('articles'));
     }
+    
     public function index1()
     {
         $articles = Article::paginate(10); // Paginate the results

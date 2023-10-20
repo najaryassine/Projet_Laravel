@@ -19,7 +19,19 @@ class Article extends Model
         return $this->belongsTo(User::class, 'client_id'); 
     }
     public function comments()
-{
+    {
     return $this->hasMany(Comment::class);
-}
+    }
+    public function isLikedByUser($user)
+    {
+        return $this->likes->contains(function ($like) use ($user) {
+        return $like->freelancer_id == $user->id || $like->client_id == $user->id;
+    });
+    }
+
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }
