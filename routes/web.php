@@ -19,7 +19,8 @@ use App\Http\Controllers\Review\ReviewController;
 use App\Http\Controllers\Chat\PusherController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
-
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::delete('/projects/{project}', [ProjectController::class, 'destroy1'])->name('projects.destroy1');
 	Route::get('/projects/show{id}', [ProjectController::class, 'show'])->name('projects.show');
 	Route::get('/projects/edit{id}', [ProjectController::class, 'edit1'])->name('projects.edit1');
-	Route::put('/projects/edit{id}', [ProjectController::class, 'update1'])->name('projects.update1');
+	Route::put('/projects/edit{id}', [ProjectController::class, 'update1'])->name('projects.update');
 
 ////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
 //////////Contracts admin routes////////////////////////////////////////////////////////////////////////////////////
@@ -107,9 +108,16 @@ Route::get('/comment-management', [CommentController::class, 'index1'])->name('c
 	Route::get('/comments/add', [CommentController::class, 'create1'])->name('comments.add');
 	Route::post('/comments/add', [CommentController::class, 'store1'])->name('comments.store');
 ////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
+///////////Payment admin routes////////////////////////////////////////////////////////////://///////////////////
+Route::post('/stripe/session/{contract_id}', [PaymentController::class, 'session'])->name('stripe.session');
+
+Route::get('/success', [PaymentController::class, 'success'])->name('success');
+Route::get('/cancel', [PaymentController::class, 'cancel'])->name('cancel');
+Route::prefix('admin')->group(function () {
+Route::get('/payments', [PaymentController::class, 'index'])->name('payment.index');
+});
 ////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
-
-
+////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
 
     Route::get('/login', function () {
 		return view('dashboard');
@@ -151,8 +159,15 @@ Route::get('/comment-management', [CommentController::class, 'index1'])->name('c
 		Route::match(['get', 'post'], '/broadcast', [PusherController::class, 'broadcast'])->name('broadcast');
 		Route::post('/receive', [PusherController::class, 'receive'])->name('receive');
 		///////////////////////////////////////
+		////////Asma routes client////////////
 		///////////////////////////////////////
-
+		Route::get('/tasks/create{projectId}', [TaskController::class, 'create'])->name('tasks.create');
+		Route::post('/tasks/create', [TaskController::class, 'store'])->name('frontoffice.tasks.store');
+		Route::get('/tasks', [TaskController::class, 'index'])->name('frontoffice.tasks.index');
+		Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
+		Route::get('/tasks{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+		Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
+		Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
 
 
@@ -219,8 +234,12 @@ Route::get('/comment-management', [CommentController::class, 'index1'])->name('c
 
 
 		///////////////////////////////////////
+		////////////Task Route////////////
 		///////////////////////////////////////
 
+		Route::get('/task/assigned', [TaskController::class ,'tasksAssignedToUser'])->name('tasks.assignedToYou');
+
+	
 	});
 });
 

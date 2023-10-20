@@ -46,15 +46,14 @@
                         @endif
 
                     </h5>
-                    <div class="mt-10 alert-msg" style="text-align: left;"></div>
-
                     <div class="bottom-meta">
                         <div class="user-details row align-items-center">
                             <div class="comment-wrap col-lg-6 col-sm-6">
                                 <ul>
                                 @if (auth()->user()->role == 1)
+    
                                     @if (auth()->user()->id == $project->client_id)
-                                    <a class="genric-btn primary-border circle "  href="{{ route('projects.edit1', [ 'id' => $project->id])}}">Modify</a>
+                                    <a class="genric-btn warning-border circle "  href="{{ route('projects.edit', [ 'id' => $project->id])}}">Modify</a>
                                     <form 
                                     action="{{ route('projects.destroy0', $project->id) }}"
                                     method="POST" onsubmit="confirmation(event)" style="display: inline;">
@@ -64,23 +63,32 @@
                                          <span class="lnr lnr-arrow-right">Delete</span>
                                         </button>
                                     </form>
-                                    @endif
-
-    
-                                @elseif (auth()->user()->role == 2)
-
+                                    <a class=" btn genric-btn success-border circle" href="{{ route('tasks.create', ['projectId' => $project->id]) }}">Add Task</a>
+                                    <a class="genric-btn primary-border circle "  href="{{ route('frontoffice.tasks.index', [ 'id' => $project->id])}}">all tasks</a>
+                                 @endif
+                            @elseif (auth()->user()->role == 2)
+                            @php
+                                $userHasTasks = \App\Models\Task::where('assigned_to', auth()->user()->id)->exists();
+                                @endphp
+                                @if ($userHasTasks)
+                                    <a href="{{ route('tasks.assignedToYou') }}" class="genric-btn primary-border circle">Tasks Assigned to You</a>
+                                    @else
                                 @if (in_array($project->id, $appliedContracts->pluck('project_id')->toArray()))
                                     <a class="genric-btn primary-border circle disable" disabled>Already Applied</a>
                                 @else
                                     <a href="{{ route('apply.contract', ['userId' => Auth::user()->id, 'projectId' => $project->id, 'cost' => intval($project->cost), 'clientId' => $project->client_id]) }}" class="genric-btn primary-border circle">Apply Contract
-                                        <span class="lnr lnr-arrow-right"></span>
-                                    </a>
+                                 <span class="lnr lnr-arrow-right"></span>
+                                     </a>
+                                 @endif
                                 @endif
+
                             @endif
                                 </ul>
                             </div>
                         </div>
                     </div>
+                    <div class="mt-10 alert-msg" style="text-align: left;"></div>
+
                 </div>                         
             </div>
             <div class="col-lg-4 sidebar">

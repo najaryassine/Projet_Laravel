@@ -45,11 +45,19 @@
                                     <h4>Project Title : {{ $contract->project->title }}</h4>
                                 </div>
                                 <ul class="btns" style="padding-left: 50px;">
+                                    @if (auth()->user()->role == 2)
                                         <a class="genric-btn success-border circle" 
                                         href="{{ route('projects.show1', ['id' => $contract->project_id]) }}"
                                         >View Project
                                             <span class="lnr lnr-arrow-right"></span>
                                         </a>
+                                    @else
+                                    <a class="genric-btn success-border circle" 
+                                        href="{{ route('projects.showC', ['id' => $contract->project_id]) }}"
+                                        >View Project
+                                            <span class="lnr lnr-arrow-right"></span>
+                                        </a>
+                                    @endif    
                                 </ul>
                             </div>
                             <p>

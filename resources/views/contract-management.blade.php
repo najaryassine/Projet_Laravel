@@ -106,6 +106,26 @@
                                             </form>
                                         </div>
                                     </td>
+                                    <td class="text-center">
+                                        @if ($contract->status == 'accepted')
+                                            @php
+                                        $payment = \App\Models\Payment::where('contract_id', $contract->id)->first();
+                                        @endphp
+
+                                        @if ($payment)
+                                         <button class="btn btn-success " disabled type="submit">
+                                            <i class="fa fa-money"></i> Paid
+                                            </button>
+                                        @else
+                                        <form action="{{ route('stripe.session', $contract->id) }}" method="POST">
+                                          @csrf
+                                        <button class="btn btn-success" type="submit">
+                                        <i class="fa fa-money"></i> Pay Now
+                                        </button>
+                                        </form>
+                                        @endif
+                                    @endif
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

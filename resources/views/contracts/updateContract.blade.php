@@ -68,8 +68,7 @@
                             <div class="form-group">
                                 <label for="project_cost" class="form-control-label">{{ __('Project cost') }}</label>
                                 <div class="@error('project_cost')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="number"  id="project_cost" name="project_cost" value="{{ intval(old('project_cost')) }}">
-                                    @error('project_cost')
+                                    <input class="form-control" type="number" id="project_cost" name="project_cost" value="{{ old('project_cost', $contract->project_cost) }}">                                    @error('project_cost')
                                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>

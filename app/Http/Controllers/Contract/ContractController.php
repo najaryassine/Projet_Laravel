@@ -96,7 +96,7 @@ class ContractController extends Controller
 
         $contract = Contract::create($validatedData);
         
-        return redirect('/project-management')->with('success', 'Project created successfully.');
+        return redirect('/contracts-management')->with('success', 'Contract created successfully.');
     }
 
     /**
@@ -139,6 +139,8 @@ class ContractController extends Controller
             'client_id' => 'required',
             'freelancer_id' => 'required',
             'project_cost' => 'required',
+            'status' => 'required',
+
         ]);
         $contract = Contract::find($id);
         $contract->update($validatedData);

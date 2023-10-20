@@ -9,7 +9,7 @@
             <h6 class="mb-0">{{ __('Update Project :') }}</h6>
         </div>
         <div class="card-body pt-4 p-3">
-            <form action="{{ route('projects.update1', ['id' => $project->id]) }}" method="POST" role="form text-left" enctype="multipart/form-data">
+            <form action="{{ route('projects.update', ['id' => $project->id]) }}" method="POST" role="form text-left" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
