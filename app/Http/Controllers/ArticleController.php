@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Article ; 
+use App\Models\Like;
 use App\Models\Comment;
 
 
@@ -17,6 +18,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        $articles = Article::with('likes')->get();
         $articles = Article::all();
         return view('frontoffice.article.index', compact('articles'));
     }
@@ -225,7 +227,12 @@ class ArticleController extends Controller
     }
     
     
- 
+ // app/Models/Article.php
+
+// app/Models/Article.php
+
+
+
     
     
 

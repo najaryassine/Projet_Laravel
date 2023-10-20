@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 
 
 
@@ -149,11 +150,10 @@ Route::get('/articles', [ArticleController::class, 'index'])->name('frontoffice.
 //Route::get('/portfolios/{portfolio}/edit', [PortfolioController::class, 'edit'])->name('portfolios.edit');
 
 //Route::put('/portfolios/{portfolio}', [PortfolioController::class, 'update'])->name('portfolios.update');
-   Route::put('/article{article}', [ArticleController::class, 'update'])->name('frontoffice.article.update');
+Route::put('/article{article}', [ArticleController::class, 'update'])->name('frontoffice.article.update');
 
 //Route::delete('/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('portfolios.destroy');
-
-        Route::get('/articles/{article}/comments', [CommentController::class, 'index'])
+Route::get('/articles/{article}/comments', [CommentController::class, 'index'])
         ->name('frontoffice.article.comments');
 
 Route::post('/articles/{article}/comments', [CommentController::class, 'store'])
@@ -172,9 +172,16 @@ Route::delete('/articles/{article}/comments/{comment}', [CommentController::clas
 Route::post('/articles/comment', [ArticleController::class, 'storeComment'])
     ->name('frontoffice.article.storeComment');
 
+Route::get('/articlee/edit{id}', [ArticleController::class, 'edit'])->name('articles.edit');
+Route::put('/articlee/edit{id}', [ArticleController::class, 'update'])->name('article.update');
 
-	Route::get('/articlee/edit{id}', [ArticleController::class, 'edit'])->name('articles.edit');
-	Route::put('/articlee/edit{id}', [ArticleController::class, 'update'])->name('article.update');
+
+// Like an article
+Route::post('/articles/{article}/like', [LikeController::class, 'like'])->name('articles.like');
+
+// Unlike an article
+Route::delete('/articles/{article}/unlike',[LikeController::class, 'unlike'])->name('articles.unlike');
+
     });
 });
 
