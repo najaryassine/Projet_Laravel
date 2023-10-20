@@ -9,7 +9,7 @@
               <li class="menu-active"><a href="index.html">freelancer</a></li>
               <li><a href="about-us.html">Postuler</a></li>
               <li><a href="category.html">Jobs</a></li>
-              <li><a href="price.html">Price</a></li>
+              <li><a href="{{ url('/articles')}}">Articles</a></li>
                 <ul>
                     <li><a href="elements.html">elements</a></li>
                     <li><a href="search.html">search</a></li>

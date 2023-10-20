@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Project\ProjectController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
+
 
 
 
@@ -78,7 +81,26 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [SessionsController::class, 'destroy']);
 	Route::get('/user-profile', [InfoUserController::class, 'create']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']);
-    Route::get('/login', function () {
+	Route::get('/article-management', [ArticleController::class, 'index1'])->name('article-management');
+	Route::delete('/articles{article}', [ArticleController::class, 'destroy1'])->name('articles.destroy');
+	Route::get('/articles/add', function () {
+		return view('addArticle');
+	});
+	Route::post('/articles/add', [ArticleController::class, 'store1'])->name('articles.store');
+	Route::get('/articles/edit{id}', [ArticleController::class, 'edit1'])->name('articles.edit');
+	Route::put('/articles/{id}', [ArticleController::class, 'update1'])->name('articles.update');
+
+	Route::get('/comment-management', [CommentController::class, 'index1'])->name('comment-management');
+	Route::get('/comments/edit{id}', [CommentController::class, 'edit1'])->name('comments.edit');
+	Route::put('/comments/{id}', [CommentController::class, 'update1'])->name('comments.update');
+	Route::delete('/comments/{comment}', [CommentController::class, 'destroy1'])->name('comments.destroy');
+	Route::get('/comments/add', [CommentController::class, 'create1'])->name('comments.add');
+	Route::post('/comments/add', [CommentController::class, 'store1'])->name('comments.store');
+
+
+
+
+	Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
     });
@@ -110,9 +132,55 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/logout2', [SessionsController::class, 'destroy']);
 		Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 
+//Route::get('/portfolios', [PortfolioController::class, 'index'])->name('portfolios.index');
+Route::get('/articles', [ArticleController::class, 'index'])->name('frontoffice.article.index');
 
-	});
+// Route::get('/portfolios/create', [PortfolioController::class, 'create'])->name('portfolios.create');
+        Route::get('/article/create', [ArticleController::class, 'create'])->name('frontoffice.article.create');
+	    Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('frontoffice.article.delete');
+
+
+//Route::post('/portfolios', [PortfolioController::class, 'store'])->name('portfolios.store');
+        Route::post('/article', [ArticleController::class, 'store'])->name('frontoffice.article.store');
+
+//Route::get('/portfolios/{portfolio}', [PortfolioController::class, 'show'])->name('portfolios.show');
+        Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('frontoffice.article.show');
+
+//Route::get('/portfolios/{portfolio}/edit', [PortfolioController::class, 'edit'])->name('portfolios.edit');
+
+//Route::put('/portfolios/{portfolio}', [PortfolioController::class, 'update'])->name('portfolios.update');
+   Route::put('/article{article}', [ArticleController::class, 'update'])->name('frontoffice.article.update');
+
+//Route::delete('/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('portfolios.destroy');
+
+        Route::get('/articles/{article}/comments', [CommentController::class, 'index'])
+        ->name('frontoffice.article.comments');
+
+Route::post('/articles/{article}/comments', [CommentController::class, 'store'])
+->name('frontoffice.article.comments.store');
+
+// Update Comment (GET and POST)
+Route::get('/articles/{article}/comments/{comment}/edit', [CommentController::class, 'edit'])
+    ->name('frontoffice.article.comments.edit');
+
+
+// Delete Comment (GET and POST)
+Route::delete('/articles/{article}/comments/{comment}', [CommentController::class, 'destroy'])
+    ->name('frontoffice.article.comments.destroy');
+
+
+Route::post('/articles/comment', [ArticleController::class, 'storeComment'])
+    ->name('frontoffice.article.storeComment');
+
+
+	Route::get('/articlee/edit{id}', [ArticleController::class, 'edit'])->name('articles.edit');
+	Route::put('/articlee/edit{id}', [ArticleController::class, 'update'])->name('article.update');
+    });
 });
+
+
+
+
 
 
 
