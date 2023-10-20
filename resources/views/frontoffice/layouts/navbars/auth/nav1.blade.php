@@ -15,7 +15,7 @@
 
                 </ul>
               </li>
-              <li class="menu-active"><a href="{{ url('/contracts/list')}}">Contracts</a></li>
+              <li class="menu-active"><a href="{{ url('/contracts/lists')}}">Contracts</a></li>
 
                 <ul>
                     <li><a href="elements.html">elements</a></li>

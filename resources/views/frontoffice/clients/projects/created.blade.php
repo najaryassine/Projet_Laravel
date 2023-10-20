@@ -65,7 +65,7 @@
                                         View <span class="lnr lnr-arrow-right"></span>
                                     </button>
                                     
-                                    <button class="genric-btn warning-border circle" style="display: inline;" type="button" onclick="window.location.href = '{{ route('projects.edit1', ['id' => $project->id]) }}'">
+                                    <button class="genric-btn warning-border circle" style="display: inline;" type="button" onclick="window.location.href = '{{ route('projects.edit', ['id' => $project->id]) }}'">
                                         Modify
                                     </button>
                                     <form 

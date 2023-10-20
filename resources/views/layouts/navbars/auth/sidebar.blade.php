@@ -100,6 +100,16 @@
           <span class="nav-link-text ms-1">Contracts Management</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link {{ (Request::is('complaint-management') ? 'active' : '') }}" href="{{ route('backoffice.complaints.index') }}">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <svg width="12px" height="12px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22c-5.3 0-10-2.08-10-10s4.7-10 10-10 10 2.08 10 10-4.7 10-10 10zm1-15h-2v6h2zm0 8h-2v2h2z"/>
+                </svg>
+            </div>
+            <span class="nav-link-text ms-1">Complaint Management</span>
+        </a>
+    </li>
     </ul>
   </div>
 </aside>

@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Contract\ContractController;
-
+use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\AdminComplaintController;
 
 
 
@@ -57,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/projects/add', [ProjectController::class, 'create1']);
 	Route::post('/projects/add', [ProjectController::class, 'store1']);
 	Route::delete('/projects/{project}', [ProjectController::class, 'destroy1'])->name('projects.destroy1');
-	Route::get('/projects/show{id}', [ProjectController::class, 'show'])->name('projects.show1');
+	Route::get('/projects/show{id}', [ProjectController::class, 'show'])->name('projects.show');
 	Route::get('/projects/edit{id}', [ProjectController::class, 'edit1'])->name('projects.edit1');
 	Route::put('/projects/edit{id}', [ProjectController::class, 'update1'])->name('projects.update1');
 
@@ -72,8 +74,19 @@ Route::get('/contracts-management', [ContractController::class, 'index1'])->name
 	Route::put('/contracts/edit{id}', [ContractController::class, 'update1'])->name('contracts.update1');
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
+//////////complaints admin routes////////////////////////////////////////////////////////////////////////////////////
+Route::get('/backoffice/complaints', [AdminComplaintController::class, 'index'])->name('backoffice.complaints.index');
+Route::get('/backoffice/complaints/create', [AdminComplaintController::class, 'create'])->name('backoffice.complaints.create');
+Route::post('/backoffice/complaints', [AdminComplaintController::class, 'store'])->name('backoffice.complaints.store');
+Route::get('/complaints{complaint}', [AdminComplaintController::class, 'show'])->name('backoffice.complaints.show');
+Route::get('/complaint/e{complaint}', [AdminComplaintController::class, 'edit'])->name('backoffice.complaints.edit');
+Route::put('/complaints{complaint}', [AdminComplaintController::class, 'update'])->name('backoffice.complaints.update');
+Route::delete('/complaints{complaint}', [AdminComplaintController::class, 'destroy'])->name('backoffice.complaints.destroy');
+
+////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
+////////////////////////////////////////////////////////////////////////////////////////////://///////////////////
+
 
 
     Route::get('/login', function () {
@@ -97,7 +110,7 @@ Route::get('/contracts-management', [ContractController::class, 'index1'])->name
 		Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
 		Route::post('/projects/create', [ProjectController::class, 'store'])->name('projects.store');
 		Route::get('/projects/list', [ProjectController::class, 'index'])->name('projects.index1');
-		Route::get('/projects/e{id}', [ProjectController::class, 'edit'])->name('projects.edit1');
+		Route::get('/projects/e{id}', [ProjectController::class, 'edit'])->name('projects.edit');
 		Route::put('/projects/e{id}', [ProjectController::class, 'update'])->name('projects.update1');
 		Route::get('/projects/created', [ProjectController::class, 'list'])->name('projects.list1');
 		Route::get('/projects{id}', [ProjectController::class, 'show1'])->name('projects.showC');
@@ -121,14 +134,41 @@ Route::get('/contracts-management', [ContractController::class, 'index1'])->name
 		Route::get('/profile2', [InfoUserController::class, 'create1']);
 		Route::post('/profile2', [InfoUserController::class, 'store1']);
 		Route::post('/profile2/password', [InfoUserController::class, 'updatePassword']);
-		
+		///////////////////////////////////////
+
         Route::get('/freelancer',[HomeController::class, 'home2'])->name('home2');;
 		Route::get('/logout2', [SessionsController::class, 'destroy']);
 		Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 		Route::get('apply/contract/{userId}/{projectId}/{cost}/{clientId}', [ContractController::class, 'apply'])->name('apply.contract');
-		Route::get('/projects/{id}', [ProjectController::class, 'show1'])->name('project.show1');
+		Route::get('/projects/{id}', [ProjectController::class, 'show1'])->name('projects.show1');
 		Route::get('/contracts/list', [ContractController::class, 'index'])->name('contracts.index0');
 		Route::delete('/contracts/list/delete{id}', [ContractController::class, 'destroy'])->name('contracts.destroy0');
+		///////////////////////////////////////
+		///portfolios du freelancer
+		///////////////////////////////////////
+		 Route::get('/portfolios', [PortfolioController::class, 'index'])->name('frontoffice.freelancers.portfolios.index');
+		 Route::get('/portfolios/create', [PortfolioController::class, 'create'])->name('frontoffice.freelancers.portfolios.create');
+		 Route::post('/portfolios', [PortfolioController::class, 'store'])->name('frontoffice.freelancers.portfolios.store');
+		 Route::get('/portfolios/{portfolio}', [PortfolioController::class, 'show'])->name('frontoffice.freelancers.portfolios.show');
+		 Route::get('/portfolio/edit{portfolio}', [PortfolioController::class, 'edit'])->name('frontoffice.freelancers.portfolios.edit');
+		 Route::put('/portfolios/{portfolio}', [PortfolioController::class, 'update'])->name('frontoffice.freelancers.portfolios.update');
+		 Route::delete('/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('frontoffice.freelancers.portfolios.destroy');
+ 		///////////////////////////////////////
+		 ////Complaints routes
+ 		///////////////////////////////////////
+		 Route::get('/complaints', [ComplaintController::class, 'index'])->name('frontoffice.freelancers.complaints.index');
+		 Route::get('/complaints/create', [ComplaintController::class, 'create'])->name('frontoffice.freelancers.complaints.create');
+		 Route::post('/complaints', [ComplaintController::class, 'store'])->name('frontoffice.freelancers.complaints.store');
+		 Route::get('/complaints/{complaint}', [ComplaintController::class, 'show'])->name('frontoffice.freelancers.complaints.show');
+		 Route::get('/complaint/edit{complaint}', [ComplaintController::class, 'edit'])->name('frontoffice.freelancers.complaints.edit');
+		 Route::put('/complaints/{complaint}', [ComplaintController::class, 'update'])->name('frontoffice.freelancers.complaints.update');
+		 Route::delete('/complaints/{complaint}', [ComplaintController::class, 'destroy'])->name('frontoffice.freelancers.complaints.destroy');
+		 Route::get('/complaints/{complaint}/pdf', [ComplaintController::class, 'generatePDF'])->name('frontoffice.freelancers.complaints.pdf');
+ 
+ 		///////////////////////////////////////
+		///////////////////////////////////////
+
+ 
 
 
 
