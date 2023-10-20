@@ -53,19 +53,26 @@
                                 @if (auth()->user()->role == 1)
                                     @if (auth()->user()->id == $project->client_id)
                                     <a class="genric-btn primary-border circle "  href="{{ route('projects.edit1', [ 'id' => $project->id])}}">Modify</a>
+                                    <a class="genric-btn primary-border circle" href="{{ route('tasks.create', ['projectId' => $project->id]) }}">Add Task</a>
+                                    <a class="genric-btn primary-border circle "  href="{{ route('frontoffice.tasks.index', [ 'id' => $project->id])}}">all tasks</a>
 
-                                    @endif
+                                                      @endif
 
     
                                 @elseif (auth()->user()->role == 2)
 
-                                @if (in_array($project->id, $appliedContracts->pluck('project_id')->toArray()))
-                                    <a class="genric-btn primary-border circle disable" disabled>Already Applied</a>
-                                @else
-                                    <a href="{{ route('apply.contract', ['userId' => Auth::user()->id, 'projectId' => $project->id, 'cost' => intval($project->cost), 'clientId' => $project->client_id]) }}" class="genric-btn primary-border circle">Apply Contract
-                                        <span class="lnr lnr-arrow-right"></span>
-                                    </a>
-                                @endif
+                                @if (auth()->check() && auth()->user()->role === 2 && auth()->user()->assignedTasks->isNotEmpty())
+    <a href="{{ route('tasks.assignedToYou') }}" class="genric-btn primary-border circle">Tasks Assigned to You</a>
+@else
+    @if (in_array($project->id, $appliedContracts->pluck('project_id')->toArray()))
+        <a class="genric-btn primary-border circle disable" disabled>Already Applied</a>
+    @else
+        <a href="{{ route('apply.contract', ['userId' => Auth::user()->id, 'projectId' => $project->id, 'cost' => intval($project->cost), 'clientId' => $project->client_id]) }}" class="genric-btn primary-border circle">Apply Contract
+            <span class="lnr lnr-arrow-right"></span>
+        </a>
+    @endif
+@endif
+
                             @endif
                                 </ul>
                             </div>

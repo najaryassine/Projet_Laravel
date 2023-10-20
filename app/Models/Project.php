@@ -23,4 +23,12 @@ class Project extends Model
     {
         $this->attributes['required_skills'] = json_encode($value);
     }
+    public function tasks()
+{
+    return $this->hasMany(Task::class, 'project_id');
+}
+public function applicants()
+{
+    return $this->belongsToMany(User::class, 'project_user', 'project_id', 'user_id')->wherePivot('role', 'freelancer');
+}
 }

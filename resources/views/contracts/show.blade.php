@@ -24,9 +24,9 @@
                         @else
                             <span class="text-success">Completed</span>
                         @endif
+                        
                     </p>
-
-                </div>
+                   
             </div>
                 <div>
                     <a href="{{ url()->previous() }}" class="btn btn-secondary mt-4 mb-4">{{ __('Back') }}</a>

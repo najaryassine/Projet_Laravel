@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Contract\ContractController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\PaymentController;
 
 
 
@@ -99,6 +101,16 @@ Route::get('/contracts-management', [ContractController::class, 'index1'])->name
 	// Route::get('/contracts/show{id}', [ContractController::class, 'show'])->name('contracts.show1');
 	Route::get('/contracts/edit{id}', [ContractController::class, 'edit1'])->name('contracts.edit1');
 	Route::put('/contracts/edit{id}', [ContractController::class, 'update1'])->name('contracts.update1');
+	//payment
+	Route::post('/stripe/session/{contract_id}', [PaymentController::class, 'session'])->name('stripe.session');
+
+	Route::get('/success', [PaymentController::class, 'success'])->name('success');
+Route::get('/cancel', [PaymentController::class, 'cancel'])->name('cancel');
+Route::prefix('admin')->group(function () {
+    Route::get('/payments', [PaymentController::class, 'index'])->name('payment.index');
+});
+
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,10 +135,20 @@ Route::get('/contracts-management', [ContractController::class, 'index1'])->name
 		Route::post('/projects/create', [ProjectController::class, 'store'])->name('projects.store');
 		Route::get('/projects/list', [ProjectController::class, 'index'])->name('projects.index1');
 		Route::get('/projects/e{id}', [ProjectController::class, 'edit'])->name('projects.edit1');
+
+		
+		Route::get('/tasks/create{projectId}', [TaskController::class, 'create'])->name('tasks.create');
+		Route::post('/tasks/create', [TaskController::class, 'store'])->name('frontoffice.tasks.store');
+		Route::get('/tasks', [TaskController::class, 'index'])->name('frontoffice.tasks.index');
+		Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
+		Route::get('/tasks{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+		Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
+		Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+		
 		Route::put('/projects/e{id}', [ProjectController::class, 'update'])->name('projects.update1');
 		Route::get('/projects/created', [ProjectController::class, 'list'])->name('projects.list1');
 		Route::get('/projects{id}', [ProjectController::class, 'show1'])->name('project.showC');
-
+	
 
 
 
@@ -142,9 +164,17 @@ Route::get('/contracts-management', [ContractController::class, 'index1'])->name
 		
         Route::get('/freelancer',[HomeController::class, 'home2'])->name('home2');;
 		Route::get('/logout2', [SessionsController::class, 'destroy']);
+		Route::get('/tasks/assigned', [TaskController::class ,'tasksAssignedToUser'])->name('tasks.assignedToYou');
 		Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 		Route::get('apply/contract/{userId}/{projectId}/{cost}/{clientId}', [ContractController::class, 'apply'])->name('apply.contract');
 		Route::get('/projects/{id}', [ProjectController::class, 'show1'])->name('project.show1');
+        
+
+
+
+		
+
+		
 
 
 	});

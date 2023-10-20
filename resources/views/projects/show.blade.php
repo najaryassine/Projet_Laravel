@@ -31,6 +31,7 @@
                 <div>
                     <a href="{{ url()->previous() }}" class="btn btn-secondary mt-4 mb-4">{{ __('Back') }}</a>
                 </div>
+                
             </div>
         </div>
     </div>

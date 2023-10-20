@@ -104,7 +104,20 @@
                                                     <i class="fas fa-trash-alt me-2"></i>Delete
                                                 </button>
                                             </form>
+                                            
+                                           
                                         </div>
+                                    </td>
+                                     <!-- Add a button for payment -->
+                                     <td class="text-center">
+                                        @if ($contract->status == 'accepted')
+                                            <form action="{{ route('stripe.session', $contract->id) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-success" type="submit">
+                                                    <i class="fa fa-money"></i> Pay Now
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
